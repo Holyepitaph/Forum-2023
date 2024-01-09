@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.js"
+    "dev": "nodemon index.js",
+    "build:ui": "rm -rf dist && cd ../Forum/ && npm run build && cp -r dist ../'Back Starter'",
+    "deploy": "build:ui && i && dev"
   },
   "keywords": [],
   "author": "",

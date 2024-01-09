@@ -1,0 +1,186 @@
+###
+//                            GET all Comments Not Admin
+###
+GET http://localhost:3003/api/comment
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjM2MjQ1M30._lfcts3Gkl2P6KrK8hG0T7yv6JxNR9NG_d622MQrM44
+###
+//                            GET all Comments Admin
+###
+GET http://localhost:3003/api/comment
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjM2MjQzM30.Im253Uxp01j-hot7-oHhoEeGr7-f7wgTyiG0sQezpic
+
+
+###
+###
+//                            Change Admin and email/phone/pass (NOT WORKING)
+###
+// Fail with no Auth
+###
+PUT http://localhost:3003/api/comment/test
+Content-Type: application/json
+
+{
+  "admin": true
+}
+###
+// Admin Pass
+###
+PUT http://localhost:3003/api/comment
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjM2MjQzM30.Im253Uxp01j-hot7-oHhoEeGr7-f7wgTyiG0sQezpic
+
+{
+  "text": "asdasdfsa",
+ "link": "www.itworkd.com",
+ "image": "987.jpeg",
+ "id": 5
+}
+###
+// NotAdmin
+###
+PUT http://localhost:3003/api/comment
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjM2MjQ1M30._lfcts3Gkl2P6KrK8hG0T7yv6JxNR9NG_d622MQrM44
+
+{
+  "text": "asdasdfsa",
+ "link": "www.itworkd.com",
+ "image": "987.jpeg",
+ "id": 1
+}
+###
+// Test
+###
+PUT http://localhost:3003/api/comment
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3QiLCJpZCI6MywiaWF0IjoxNzAwMDgzNTU4fQ.6W45tVGCtFTrFmRbYIg_TaF0h7wAliZ04diy0K8vnU4
+
+{
+  "text": "asdf",
+ "postId": 5
+}
+
+
+
+###
+//                                NEW Comment
+###
+//Admin
+###
+Post http://localhost:3003/api/comment
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjM2MjQzM30.Im253Uxp01j-hot7-oHhoEeGr7-f7wgTyiG0sQezpic
+
+{
+    "text": "This is the First Forum",
+    "link": "www.sent.com",
+    "image": "123.jpeg",
+    "postId": 1
+}
+###
+//NotAdmin
+###
+Post http://localhost:3003/api/comment
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjM2MjQ1M30._lfcts3Gkl2P6KrK8hG0T7yv6JxNR9NG_d622MQrM44
+
+{
+    "text": "This is the First Forum",
+    "link": "www.sent.com",
+    "image": "123.jpeg",
+    "postId": 1
+}
+###
+###
+Post http://localhost:3003/api/comment
+Content-Type: application/json
+
+{
+    "text": "This is the First Forum",
+    "link": "www.sent.com",
+    "image": "123.jpeg",
+    "postId": 2
+}
+###
+
+
+
+
+###
+//                                NEW SubComment
+###
+//Admin
+###
+Post http://localhost:3003/api/comment/14
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjM2MjQzM30.Im253Uxp01j-hot7-oHhoEeGr7-f7wgTyiG0sQezpic
+
+{
+    "text": "This is the First Forum",
+    "link": "www.sent.com",
+    "image": "123.jpeg"
+}
+###
+//NotAdmin
+###
+Post http://localhost:3003/api/comment/1
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjM2MjQ1M30._lfcts3Gkl2P6KrK8hG0T7yv6JxNR9NG_d622MQrM44
+
+{
+    "text": "This is the First Forum",
+    "link": "www.sent.com",
+    "image": "123.jpeg"
+}
+###
+###
+Post http://localhost:3003/api/comment/1
+Content-Type: application/json
+
+{
+    "text": "This is the First Forum",
+    "link": "www.sent.com",
+    "image": "123.jpeg"
+}
+###
+
+
+
+
+###
+//                             Deleting Posts (Admin only)
+###
+###
+//not Admin
+###
+DELETE  http://localhost:3003/api/comment
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjM2MjQ1M30._lfcts3Gkl2P6KrK8hG0T7yv6JxNR9NG_d622MQrM44
+
+{
+    "id": 5
+}
+###
+//Random User
+###
+DELETE  http://localhost:3003/api/comment
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMDEwNzIxN30.Lj1TJUtOgcpwGv8IilvvYaFAEUeEWLhKnMNuQNex0Qo
+
+{
+    "id": 1
+}
+###
+//Admin
+###
+DELETE  http://localhost:3003/api/comment
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjM2MjQzM30.Im253Uxp01j-hot7-oHhoEeGr7-f7wgTyiG0sQezpic
+
+{
+    "id": 4
+}
+
+
+
+

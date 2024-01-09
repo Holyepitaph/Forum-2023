@@ -1,0 +1,65 @@
+
+CSS every Page
+============================================
+Done
+
+Change ForumPost and Comments Links for User to link to userpage
+
+**Create Pipeline through Plesk which send dist of Front to Back and Launches back
+
+
+Admin
+//userSingle//
+Subcomments need user attached and links to profile
+//forum//
+Consider main forums to have User attached and links
+add image upload and display functionality
+//comment//
+add image upload and display functionality
+//messageSingle//
+Need user attached and links to profile...maybe adjusted in UI in future
+//host//
+adjust friends list to allow only approved friends
+add image viewing
+//main//
+figure out what I want displayed on Main
+
+User
+**Consider method to display friend requests
+**Consider Forums unable to be deleted by users if not then only delete one created by user.
+**Consider Posts unable to be deleted by Users if not then only delete one created by user.
+**add comment/subcomment removal to users
+//Forum//
+add image upload and display functionality.
+//forumPost//
+change text to state "total Comments"
+Add user attached and links to profile
+//post//
+add link to user. change user attached
+(subcomments need same feature as above.)
+both need image uploads and display
+//messageSingle//
+add user attached and links to profile....again adjusted in UI in future
+//userList//
+*Confirm list should public false and remove blocked users from either side also remove self
+*Remove total messageSingle/friends/Forums
+//userSingle//
+add logic from admin for adding friends
+add image display for forums
+
+NotLoggedIn
+Conside making Forums viewable but not able to be commented on without signUp.
+--No Messaging
+--No Viewing other Users
+
+
+LoginMenu
+--work on conditional function
+        --logout should be displayed when session is active
+        --signup and login should be displayed when no session is active
+
+Overall
+**Consider routing methods for not being logged in but accessing blocked material
+
+--------------------------------------------
+Setup Routes for assumed Pages 12/26/23

@@ -1,0 +1,189 @@
+###
+//                            GET all users single User(Notadmin)
+###
+GET http://localhost:3003/api/users
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjM2MjQ1M30._lfcts3Gkl2P6KrK8hG0T7yv6JxNR9NG_d622MQrM44
+###
+//                            GET all users Admin
+###
+GET http://localhost:3003/api/users
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjM2MjQzM30.Im253Uxp01j-hot7-oHhoEeGr7-f7wgTyiG0sQezpic
+
+
+###
+###
+//                            Change Admin and email/phone/pass
+###
+// Fail with no Auth
+###
+PUT http://localhost:3003/api/users/test
+Content-Type: application/json
+
+{
+  "admin": true
+}
+###
+// Admin Pass
+###
+PUT http://localhost:3003/api/users/notadmin
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMzYyMDg4NH0.M01JfeLPrBYjkHNfsSsW50fj2ibUQoORzO5M-JPR0d4
+
+{
+  "admin": false,
+    "email": "test@testa.com",
+  "phone" :"15646874651",
+  "password": "secret"
+}
+###
+// NotAdmin
+###
+PUT http://localhost:3003/api/users/notadmin
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMzYyMDA1NH0.AH6eRcRv4cTZTC5sgZTwqHKa6LNl9pvwg_88RenmDZI
+
+{
+  "admin": true,
+  "email": "test@testa.com",
+  "phone" :"85496465",
+  "password": "secret",
+  "private": false
+}
+###
+// Test
+###
+PUT http://localhost:3003/api/users/test
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3QiLCJpZCI6MywiaWF0IjoxNzAwMDgzNTU4fQ.6W45tVGCtFTrFmRbYIg_TaF0h7wAliZ04diy0K8vnU4
+
+{
+  "admin": true,
+  "email": "test@testa.com",
+  "phone" :"15646874651",
+  "password": "secret"
+}
+
+
+
+###
+//                                NEW Users
+###
+###
+Post http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "Admin",
+    "name": "Test",
+    "password": "secret"
+}
+###
+###
+Post http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "NotAdmin",
+    "name": "Test",
+    "password": "secret"
+}
+###
+###
+Post http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "Tasdfesdfas",
+    "name": "Test",
+    "password": "secret"
+}
+###
+
+
+
+
+
+###
+//                            Logging In for Tokens
+###
+Post http://localhost:3003/api/login
+Content-Type: application/json
+ 
+{
+    "username": "Admin",
+    "password": "secret"
+}
+###
+Post http://localhost:3003/api/login
+Content-Type: application/json
+ 
+{
+    "username": "NotAdmin",
+    "password": "secret"
+}
+###
+Post http://localhost:3003/api/login
+Content-Type: application/json
+ 
+{
+    "username": "Tasdfeas",
+    "password": "secret"
+}
+
+
+
+###
+//                            New Friends
+###
+Post http://localhost:3003/api/friend
+Content-Type: application/json
+ 
+{
+    "username": "Admin",
+    "password": "secret"
+}
+###
+Post http://localhost:3003/api/friend
+Content-Type: application/json
+ 
+{
+    "username": "NotAdmin",
+    "password": "secret"
+}
+###
+Post http://localhost:3003/api/friend
+Content-Type: application/json
+ 
+{
+    "username": "Test",
+    "password": "secret"
+}
+
+
+
+###
+//                             Deleting Users
+###
+###
+//Same User
+###
+DELETE  http://localhost:3003/api/users/TEAS
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3QiLCJpZCI6OCwiaWF0IjoxNjk5OTM1MjE0fQ.0UNIenGoFkqXrEpOKXM9JrKmkocUMi3qhb6a4cPiLOs
+###
+//Random User
+###
+DELETE  http://localhost:3003/api/users/TEAS
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMDEwNzIxN30.Lj1TJUtOgcpwGv8IilvvYaFAEUeEWLhKnMNuQNex0Qo
+###
+//Admin
+###
+DELETE  http://localhost:3003/api/users/Tasdfeas
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRhc2RmZWFzIiwiaWQiOjMsImlhdCI6MTcwMzYyMDk5M30.WUae27RvsKeKfvIrq2FlvcuFhUwVGpH-9gy4F4Lf6s8
+
+
+
+
+

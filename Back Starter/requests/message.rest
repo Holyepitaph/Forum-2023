@@ -1,0 +1,95 @@
+###
+//                            GET all users NOTADMIN
+###
+GET http://localhost:3003/api/message
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjUzMjQxNH0.u4xusm4Y6_WvxLf6xR7Dme0e9IppQONMNLIAuWAo358
+###
+//                            GET all users ADMIN
+###
+GET http://localhost:3003/api/message
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjUzMjU2Nn0.4hJtktAoJzEA1omU9tRO7Pj6ZB4Jz8mOTH-O7bLke2k
+
+
+###
+//                            Making new Message on New Boards
+//Admin
+###
+Post http://localhost:3003/api/message
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMzU3NjM4Mn0.s9vlMLlygI3q9axGaQNCkGZipm9tSt3E1Nlufpa6XXI
+
+{
+    "userId": 5,
+    "text": "Text A hopefull More"
+}
+###
+//Not ADmin
+###
+Post http://localhost:3003/api/message
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMzU3NjQwMX0.OBm4vDzz2CoZ1Pf-ecat4oNq_v_9zums_j61zFpua5w
+
+{
+    "userId": 1,
+   "text": "Text A hopefull More"
+}
+
+
+###
+//                            Making new Message on old Boards
+//Admin
+###
+Post http://localhost:3003/api/message
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMzU3NjM4Mn0.s9vlMLlygI3q9axGaQNCkGZipm9tSt3E1Nlufpa6XXI
+
+{
+    "boardId": 2,
+    "text": "Texast A hopasdfefull More"
+}
+###
+//Not ADmin
+###
+Post http://localhost:3003/api/message
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMzU3NjQwMX0.OBm4vDzz2CoZ1Pf-ecat4oNq_v_9zums_j61zFpua5w
+ 
+{
+    "boardId": 1,
+   "text": "Text A hopefull More"
+}
+
+
+###
+//                            Delete Follower Link
+//Admin
+###
+DELETE http://localhost:3003/api/message
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjUzMjU2Nn0.4hJtktAoJzEA1omU9tRO7Pj6ZB4Jz8mOTH-O7bLke2k
+
+{
+    "userId": 2
+}
+###
+//Not ADmin
+###
+DELETE http://localhost:3003/api/message
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjUzMjQxNH0.u4xusm4Y6_WvxLf6xR7Dme0e9IppQONMNLIAuWAo358
+ 
+{
+    "userId": 1,
+    "status": "friend"
+}
+###
+//Blocking Someone Not ADmin
+###
+DELETE http://localhost:3003/api/message
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjUzMjQxNH0.u4xusm4Y6_WvxLf6xR7Dme0e9IppQONMNLIAuWAo358
+
+{
+    "username": "Test",
+    "password": "secret"
+}

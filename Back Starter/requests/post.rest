@@ -1,0 +1,136 @@
+###
+//                            GET all Posts Not Admin
+###
+GET http://localhost:3003/api/post
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjM2MjQ1M30._lfcts3Gkl2P6KrK8hG0T7yv6JxNR9NG_d622MQrM44
+###
+//                            GET all Posts Admin
+###
+GET http://localhost:3003/api/post
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjM2MjQzM30.Im253Uxp01j-hot7-oHhoEeGr7-f7wgTyiG0sQezpic
+
+
+###
+###
+//                            Change Admin and email/phone/pass (NOT WORKING)
+###
+// Fail with no Auth
+###
+PUT http://localhost:3003/api/post/test
+Content-Type: application/json
+
+{
+  "admin": true
+}
+###
+// Admin Pass
+###
+PUT http://localhost:3003/api/post
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjM2MjQzM30.Im253Uxp01j-hot7-oHhoEeGr7-f7wgTyiG0sQezpic
+
+{
+  "text": "asdf",
+ "postId": 5
+}
+###
+// NotAdmin
+###
+PUT http://localhost:3003/api/post
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjM2MjQ1M30._lfcts3Gkl2P6KrK8hG0T7yv6JxNR9NG_d622MQrM44
+
+{
+  "text": "adsdf",
+ "postId": 6
+}
+###
+// Test
+###
+PUT http://localhost:3003/api/post
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3QiLCJpZCI6MywiaWF0IjoxNzAwMDgzNTU4fQ.6W45tVGCtFTrFmRbYIg_TaF0h7wAliZ04diy0K8vnU4
+
+{
+  "text": "asdf",
+ "postId": 5
+}
+
+
+
+###
+//                                NEW Posts
+###
+//Admin
+###
+Post http://localhost:3003/api/post
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjM2MjQzM30.Im253Uxp01j-hot7-oHhoEeGr7-f7wgTyiG0sQezpic
+
+{
+    "text": "This is the First Post",
+    "forumId": 2
+}
+###
+//NotAdmin
+###
+Post http://localhost:3003/api/post
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjM2MjQ1M30._lfcts3Gkl2P6KrK8hG0T7yv6JxNR9NG_d622MQrM44
+
+{
+    "text": "This is the First Post",
+    "forumId": 2
+}
+###
+###
+Post http://localhost:3003/api/post
+Content-Type: application/json
+
+{
+    "username": "Tasdfeas",
+    "name": "Test",
+    "password": "secret"
+}
+###
+
+
+
+
+###
+//                             Deleting Posts (Admin only)
+###
+###
+//not Admin
+###
+DELETE  http://localhost:3003/api/post
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjM2MjQ1M30._lfcts3Gkl2P6KrK8hG0T7yv6JxNR9NG_d622MQrM44
+
+{
+    "postId": 3
+}
+###
+//Random User
+###
+DELETE  http://localhost:3003/api/post
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMDEwNzIxN30.Lj1TJUtOgcpwGv8IilvvYaFAEUeEWLhKnMNuQNex0Qo
+
+{
+    "postId": 1
+}
+###
+//Admin
+###
+DELETE  http://localhost:3003/api/post
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjM2MjQzM30.Im253Uxp01j-hot7-oHhoEeGr7-f7wgTyiG0sQezpic
+
+{
+    "postId": 4
+}
+
+
+
+

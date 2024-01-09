@@ -1,0 +1,81 @@
+User 
+    GEt changed to included Message and Message Boards
+
+Forum Put broken
+
+Friends 
+    Taken from Breaditt. Needs config.
+    Rest started but not tested.
+
+
+posts Put broken
++
+
+
+
+Taking Message from the other
+    Allows Get from all Boards and needs adjustement in the future
+    Post allows creation of new board if one does not exist
+    Otherwise adds to it if proper details are added.
+    No Delete nor Put implemented
+
+
+
+=======================================================================
+1/4/24
+
+Changed To create and accept cookies
+Transitioned to new DB
+
+-*accepts*-
+-+ checks +-(Ithink i did parmams seperated from accepts)
+
+Users(Images broken)
+    Get -+admin+- shows friends(from friendList), message, messageBoard and Forum
+    (Admin gets everyone)(User gets self)
+    Post -*admin/email/phone/password*- add new user
+    Put -*email/phone/password/private////params.username*- changes users info /users
+    (admin can change anyone)(User changes self only) 
+    Delete -*params.username*- Deletes user
+    Testing --> All good
+
+Message /message
+    Get Get all
+    Post New Board -*userId/text*- Creates new Message Board
+    with second user(userId) and sends message if none exists
+    Otherwise sends to exisinting message board
+    Put
+    Delete
+
+Forum (Images broken) /forum
+    Get shows all forums with associated posts
+    Post -*text/image*- Creates new Forum
+    Put -*text/image/id*- Change text and image of selected forum(id)
+    (Admin Change all)(User changes Forum created by them)
+    Delete -*id*- Deletes forum(id)
+    (Admin Deletes any)(User Deletes own creation)
+
+Friends /friend
+    Post -*userId/status*- Creates link between otherUser(userId)
+    Status should be either friend or blocked 
+    Delete -*userId*- Deletes record from both sides regardless of 
+    block...could be a problem actually
+
+posts /post
+    Get  Shows all posts with associates Comments and Forums
+    Post -*text/forumId*- Creates new Post matching Forum(forumId)
+    Put -*text/postId*- changes Post(postId) text
+    (Admin changes any)(User changes own)
+    Delete -*postId*- Deletes forum(postId)
+    (Admin Deletes any)(User Deletes own creation)
+
+Comments /comment
+    Get Shows all Comments with associated Posts and SubComments
+    Post -*text/link/image/postId*- Creates Comment linked to Post(postId)
+    PostSubComments -*text/link/image/*- -+params.commentId+- Creates
+        Comment linked to Comment(params.commentId)
+    Put  -*text/link/image/id*- Changes comment(id)
+    (admin changes all)(User changes own comment)
+    Delete -*id*- Deletes comment(id)
+    (admin changes all)(User changes own comment)
+<--May have issues with sub comments on deletion-->

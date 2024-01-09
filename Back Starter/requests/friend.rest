@@ -1,0 +1,72 @@
+
+
+###
+//                            Making new Follower 
+//Admin
+###
+Post http://localhost:3003/api/friend
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjM2MjQzM30.Im253Uxp01j-hot7-oHhoEeGr7-f7wgTyiG0sQezpic
+
+{
+    "userId": 2,
+    "status": "friend"
+}
+###
+//Not ADmin
+###
+Post http://localhost:3003/api/friend
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjM2MjQ1M30._lfcts3Gkl2P6KrK8hG0T7yv6JxNR9NG_d622MQrM44
+ 
+{
+    "userId": 1,
+    "status": "friend"
+}
+###
+//Blocking Someone Not ADmin
+###
+Post http://localhost:3003/api/friend
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjUzMjQxNH0.u4xusm4Y6_WvxLf6xR7Dme0e9IppQONMNLIAuWAo358
+
+{
+    "username": "Test",
+    "password": "secret"
+}
+
+
+
+###
+//                            Delete Follower Link
+//Admin
+###
+DELETE http://localhost:3003/api/friend
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IkFkbWluIiwiaWQiOjEsImlhdCI6MTcwMjM2MjQzM30.Im253Uxp01j-hot7-oHhoEeGr7-f7wgTyiG0sQezpic
+
+{
+    "userId": 2
+}
+###
+//Not ADmin
+###
+DELETE http://localhost:3003/api/friend
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjM2MjQ1M30._lfcts3Gkl2P6KrK8hG0T7yv6JxNR9NG_d622MQrM44
+ 
+{
+    "userId": 1,
+    "status": "friend"
+}
+###
+//Blocking Someone Not ADmin
+###
+DELETE http://localhost:3003/api/friend
+Content-Type: application/json
+Authorization:  Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Ik5vdEFkbWluIiwiaWQiOjIsImlhdCI6MTcwMjUzMjQxNH0.u4xusm4Y6_WvxLf6xR7Dme0e9IppQONMNLIAuWAo358
+
+{
+    "username": "Test",
+    "password": "secret"
+}

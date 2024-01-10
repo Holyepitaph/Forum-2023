@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js",
-    "build:ui": "rm -rf dist && cd ../Forum/ && npm run build && cp -r dist ../'Back Starter'",
+    "build:ui": "rm -rf dist && cd ../Forum/ && npm run build:ui && cp -r dist ../'Back Starter'",
     "deploy": "npm run build:ui && npm run i && npm run dev"
   },
   "keywords": [],

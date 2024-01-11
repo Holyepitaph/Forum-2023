@@ -1,18 +1,44 @@
 import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import postServices from '../../services/post'
+import userServices from '../../services/user'
 
-const MainForumPost = ({forumList, change}) => {
+const IdToUserName = ({info}) =>{
+    const [name,setName] = useState('')
+    
+    const nameCheck =async (info) =>{
+        const test = await userServices.getOne({id:info})
+        return setName(test.username)
+    }
+    nameCheck(info)
+    return(
+        <>
+            <div>{name}</div>
+        </>
+    )
+}
+
+const MainForumPost = ({forumList, change, user}) => {
+    const deletePost =async (info) =>{
+        await postServices.deletePost({postId: info})
+        update()
+    }
     return(
         <div>
             <button onClick={()=>change()}>New Post</button>
             {forumList.map(x=>(
-                <Link to={`/user/Forum/Post/${x.id}`} key={x.id}>
-                    <div>Post Name: {x.text}</div>
-                    <div>Created on: {x.created}</div>
-                    <div>{x.comments.length}</div>
+                <div key={x.id}>
+                {user == x.userId ? <button onClick={()=>deletePost(x.id)}>Delete</button> : null}
+                    <Link to={`/user/Forum/Post/${x.id}`}>
+                        <div>Post Name: {x.text}</div>
+                        <div>Created on: {x.created}</div>
+                        <div>Number of Comments: {x.comments.length}</div>
+                    </Link>
+                    <Link to={`/user/User/${x.userId}`}>
+                        <div>Created By: </div><IdToUserName info={x.userId}/>
+                    </Link>
                     <br/>
-                </Link>
+                </div>
             ))}
         </div>
     )
@@ -47,7 +73,7 @@ const InputPost = ({id,change, update}) =>{
     )
 }
 
-export const UserForumPost = ({userUpdate}) =>{
+export const UserForumPost = ({userUpdate, user}) =>{
     const [posts,setPosts] = useState('')
     const [hidden, setHidden] = useState('')
     const id = useParams().forumId
@@ -76,7 +102,7 @@ export const UserForumPost = ({userUpdate}) =>{
     console.log(forumList)
     return(
         <div>
-            {hidden ? <InputPost change={()=>setHidden(false)} id={id} update={()=>postsCheck()}/> : <MainForumPost forumList={forumList} change={()=>setHidden(true)}/>}
+            {hidden ? <InputPost change={()=>setHidden(false)} id={id} update={()=>postsCheck()}/> : <MainForumPost forumList={forumList} change={()=>setHidden(true)} user={user}/>}
         </div>
 
     )

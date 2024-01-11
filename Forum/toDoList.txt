@@ -10,7 +10,8 @@ Change ForumPost and Comments Links for User to link to userpage
 
 Admin
 //userSingle//
-Subcomments need user attached and links to profile
+**User needs name attached
+**Relationship logic
 //forum//
 Consider main forums to have User attached and links
 add image upload and display functionality
@@ -19,16 +20,19 @@ add image upload and display functionality
 //messageSingle//
 Need user attached and links to profile...maybe adjusted in UI in future
 //host//
-adjust friends list to allow only approved friends
+**adjust friends list to show approved and pending list
 add image viewing
+**add changing email phone image password
 //main//
 figure out what I want displayed on Main
+//messages//
+seperate between admin messages and other users
 
 User
-**Consider method to display friend requests
-**Consider Forums unable to be deleted by users if not then only delete one created by user.
-**Consider Posts unable to be deleted by Users if not then only delete one created by user.
-**add comment/subcomment removal to users
+Consider method to display friend requests
+Consider Forums unable to be deleted by users if not then only delete one created by user.
+Consider Posts unable to be deleted by Users if not then only delete one created by user.
+add comment/subcomment removal to users
 //Forum//
 add image upload and display functionality.
 //forumPost//

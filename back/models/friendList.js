@@ -12,7 +12,6 @@ FriendList.init({
   userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
-    primaryKey: true,
     references: { model: 'users', key: 'id' },
   },
   friendId: {

@@ -117,7 +117,7 @@ function App() {
       <Router>
       {/* {userStatus.admin ? <AdminMenu/> : <UserMenu/>} */}
       <MenuLogic admin={userStatus.admin}/>
-      <LoginMenu logoutFunction={logoutFunction}/>
+      <LoginMenu logoutFunction={logoutFunction} user={userStatus}/>
         <Routes>
     {/* Admin Routes */}
           <Route path="/admin" element={userStatus.admin ? <AdminMain userUpdate={userUpdate}/>: <Navigate replace to="/" />} />
@@ -131,15 +131,15 @@ function App() {
           <Route path="/admin/User/:userId" element={userStatus.admin ? <AdminUserSingle userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
     {/* User Routes */}
           <Route path="/user" element={userStatus.admin == false ? <UserMain userUpdate={userUpdate}/> : <Navigate replace to="/" />} />
-          <Route path="/user/Forum" element={userStatus.admin == false ? <UserForum userUpdate={userUpdate}/> : <Navigate replace to="/" />} />
-          <Route path="/user/Forum/:forumId" element={userStatus.admin == false ? <UserForumPost userUpdate={userUpdate}/> : <Navigate replace to="/" />} />
-          <Route path="/user/Forum/Post/:postId" element={userStatus.admin == false ? <UserPost userUpdate={userUpdate}/> : <Navigate replace to="/" />} />
+          <Route path="/user/Forum" element={userStatus.admin == false ? <UserForum userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
+          <Route path="/user/Forum/:forumId" element={userStatus.admin == false ? <UserForumPost userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
+          <Route path="/user/Forum/Post/:postId" element={userStatus.admin == false ? <UserPost userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
           <Route path="/user/Messages" element={userStatus.admin == false ? <UserMessage userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
           <Route path="/user/Messages/:messageId" element={userStatus.admin == false ? <UserMessageSingle userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
-          <Route path="/user/User" element={userStatus.admin == false ? <UserUserList userUpdate={userUpdate}/> : <Navigate replace to="/" />} />
+          <Route path="/user/User" element={userStatus.admin == false ? <UserUserList userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
           <Route path="/user/User/:userId" element={userStatus.admin == false ? <UserUserSingle userUpdate={userUpdate}/> : <Navigate replace to="/" />} />
           <Route path="/" element={ <Test/> } />
-          <Route path="/login" element={<LoginPage userUpdate={userUpdate}/>} />
+          <Route path="/login" element={ !userStatus ? <LoginPage userUpdate={userUpdate}/> : <Navigate replace to="/"/>} />
           <Route path="/signUp" element={<SignUp/>} />
         </Routes>
       </Router>

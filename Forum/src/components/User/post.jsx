@@ -2,9 +2,31 @@ import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import postServices from '../../services/post'
 import commentServices from '../../services/comment'
+import userServices from '../../services/user'
 
-const SubComment = ({sub,comment, update}) =>{
+const IdToUserName = ({info}) =>{
+    const [name,setName] = useState('')
+    
+    const nameCheck =async (info) =>{
+        const test = await userServices.getOne({id:info})
+        console.log(test.username)
+        return setName(test.username)
+    }
+    nameCheck(info)
+    return(
+        <>
+            <div>{name}</div>
+        </>
+    )
+}
+
+const SubComment = ({sub,comment, update, user}) =>{
     const [hidden, setHidden] = useState(false)
+
+    const deleteSubComment =async (info) =>{
+        await commentServices.deleteComment({id:info})
+        update()
+    }
 
     return(
         <div>
@@ -13,21 +35,30 @@ const SubComment = ({sub,comment, update}) =>{
             {sub.Sub.map(x=>(
                 <div key={x.id}>
                     <br/>
+                    {user == x.userId ? <button onClick={()=>deleteSubComment(x.id)}>Delete</button> : null}
                     <div>{x.text}</div>
                     <div>{x.link}</div>
                     <div>{x.image}</div>
                     <div>{x.created}</div>
+                    <Link to={`/user/User/${x.userId}`}><div>User: </div>
+                        <IdToUserName info={x.userId}/>
+                    </Link>
                 </div>
             ))}
         </div>
     )
 }
 
-const MainPost = ({singlePost, change, update, id}) => {
+const MainPost = ({singlePost, change, update, id, user}) => {
     const [hidden, setHidden] = useState(false)
 
     const inputFunction = () =>{
         change()
+        update()
+    }
+
+    const commentDelete =async (info) =>{
+        await commentServices.deleteComment({id:info})
         update()
     }
 
@@ -37,16 +68,21 @@ const MainPost = ({singlePost, change, update, id}) => {
                 <div key={x.id}>
                     <div>Post Name: {x.text}</div>
                     <div>Created on: {x.created}</div>
-                    <Link>User: {x.userId}</Link>
+                    <Link to={`/user/User/${x.userId}`}>User: <IdToUserName info={x.userId}/></Link>
                     <div>Comments: </div> 
                     {hidden ? <InputComment change={()=>inputFunction()} id={id} update={()=>update()} hidden={()=>setHidden(false)}/> : <button onClick={()=>setHidden(true)}>New Comment</button>}
                     <div>{x.comments.map(x=>(
                         <div key={x.id}>
                             <br/>
+                            {user == x.userId ? <button onClick={()=>commentDelete(x.id)}>Delete</button> : null}
                             <div>{x.image}</div>
                             <div>{x.text}</div>
                             <div>{x.link}</div>
-                            <SubComment sub={x} comment={x.id} update={()=>update()}/>
+                            <Link to={`/user/User/${x.userId}`}>
+                                <div>User: </div>
+                                <IdToUserName info={x.userId}/>
+                            </Link>
+                            <SubComment sub={x} comment={x.id} update={()=>update()} user={user}/>
                         </div>
                     ))}</div>
                     <br/>
@@ -154,7 +190,7 @@ const InputSubComment = ({id, update, hidden}) =>{
 }
 
 
-export const UserPost = ({userUpdate}) =>{
+export const UserPost = ({userUpdate, user}) =>{
     const [posts, setPosts] = useState('')
     const id = useParams().postId
     let singlePost
@@ -183,7 +219,7 @@ export const UserPost = ({userUpdate}) =>{
 
     return(
         <div>
-            <MainPost singlePost={singlePost} update={()=>postCheck()} id={id}/>
+            <MainPost singlePost={singlePost} update={()=>postCheck()} id={id} user={user}/>
         </div>
 
     )

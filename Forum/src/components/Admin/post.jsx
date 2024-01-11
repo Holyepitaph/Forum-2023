@@ -41,6 +41,9 @@ const SubComment = ({sub,comment, update}) =>{
                     <div>{x.link}</div>
                     <div>{x.image}</div>
                     <div>{x.created}</div>
+                    <Link to={`/admin/User/${x.userId}`}><div>User: </div>
+                        <IdToUserName info={x.userId}/>
+                    </Link>
                 </div>
             ))}
         </div>
@@ -77,6 +80,10 @@ const MainPost = ({singlePost, change, update, id}) => {
                             <div>{x.image}</div>
                             <div>{x.text}</div>
                             <div>{x.link}</div>
+                            <Link to={`/admin/User/${x.userId}`}>
+                                <div>User: </div>
+                                <IdToUserName info={x.userId}/>
+                            </Link>
                             <SubComment sub={x} comment={x.id} update={()=>update()}/>
                         </div>
                     ))}</div>

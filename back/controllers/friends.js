@@ -20,6 +20,32 @@ router.post('/',tokenExtractor, async (req, res) => {
 
 })
 
+router.post('/check',tokenExtractor, async (req, res) => {
+  try{
+    const user = await User.findByPk(req.decodedToken.id)
+    const secondUser = await User.findByPk(req.body.userId)
+    let checkList = []
+    const firstCheck = await FriendList.findAll({where:{
+      userId: user.id,
+      friendId: secondUser.id
+    }})
+    const secondCheck = await FriendList.findAll({where:{
+      userId: secondUser.id,
+      friendId: user.id
+    }})
+    if(firstCheck){
+      checkList.push(...firstCheck)
+    }
+    if(secondCheck){
+      checkList.push(...secondCheck)
+    }
+    res.json(checkList)
+  }catch(error) {
+        return res.status(400).json({ error })
+      }  
+
+})
+
 router.delete('/',tokenExtractor, async (req, res) => {
   try{
     const user = await User.findByPk(req.decodedToken.id)

@@ -2,12 +2,18 @@ import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import forumServices from '../../services/forum'
 
-const MainForum = ({forumList, change}) => {
+const MainForum = ({forumList, change, update, user}) => {
+    const deleteForum =async (info)=>{
+        await forumServices.deleteForum({id:info})
+        update()
+    }
     return(
     <div>
     <button onClick={()=>change()}>New Forum</button>
         {forumList.map(x=>(
-            <Link to={`/user/Forum/${x.id}`} key={x.id}>
+            <div key={x.id}>
+            {user == x.userId ? <button onClick={()=>deleteForum(x.id)}>Delete</button> : null}
+                <Link to={`/user/Forum/${x.id}`}>
                 <div>{x.image}</div>
                 <div>Forum Name: {x.text}</div>
                 <div>Created on: {x.created}</div>
@@ -15,6 +21,7 @@ const MainForum = ({forumList, change}) => {
                 <div> Number of Posts: {x.posts.length}</div>
                 <br/>
             </Link>
+            </div>
         ))}
     </div>
     )
@@ -59,7 +66,7 @@ const InputForum = ({change,update}) =>{
     )
 }
 
-export const UserForum  = ({userUpdate}) =>{
+export const UserForum  = ({userUpdate, user}) =>{
 const [hidden, setHidden] = useState(false)
 const [forumList, setForumList] = useState('')
 
@@ -81,7 +88,7 @@ const forumCheck = async () =>{
 
     return(
         <div>
-            {hidden ? <InputForum change={()=>setHidden(false)} update={()=>forumCheck()}/> : <MainForum forumList={forumList} change={()=>setHidden(true)}/> }
+            {hidden ? <InputForum change={()=>setHidden(false)} update={()=>forumCheck()}/> : <MainForum forumList={forumList} change={()=>setHidden(true)} update={()=>forumCheck()} user={user}/> }
         </div>
 
     )

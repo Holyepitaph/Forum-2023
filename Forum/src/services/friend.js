@@ -6,6 +6,11 @@ const getAll = async () => {
   return response.data
 }
 
+const check = async (info) =>{
+  const response = await axios.post(`${baseUrl}/check`, info)
+  return response.data
+}
+
 const newFriend = async (info) => {
     const send ={
         status: 'friend',
@@ -16,13 +21,13 @@ const newFriend = async (info) => {
 }
 
 const blockUser = async (info) => {
-    const send ={
-        status: 'blocked',
-        userId: info.userId
-    }
-  const response = await axios.post(baseUrl,send)
-    return response.data
+  const send ={
+      status: 'blocked',
+      userId: info.userId
   }
+const response = await axios.post(baseUrl,send)
+return response.data
+}
 
 
 const deleteFriend = async (info) => {
@@ -30,4 +35,4 @@ const deleteFriend = async (info) => {
     return response.data
   }
 
-export default { getAll,newFriend ,blockUser , deleteFriend }
+export default { getAll,check, newFriend ,blockUser , deleteFriend }

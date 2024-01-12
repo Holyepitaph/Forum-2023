@@ -35,6 +35,13 @@ app.use('/api/friend', friendRouter)
 app.use('/api/message', messageRouter)
 app.use('/api/comment', commentRouter)
 app.use('/api/image', imageRouter)
+app.get("/*", function (req, res) {
+  res.sendFile(path.join(__dirname, "dist/index.html"), function (err) {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 
     const start = async () =>{

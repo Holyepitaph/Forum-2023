@@ -16,7 +16,7 @@ const IdToUserName = ({info}) =>{
     nameCheck(info)
     return(
         <>
-            <div>{name}</div>
+            <span>{name}</span>
         </>
     )
 }
@@ -30,28 +30,40 @@ const SubComment = ({sub,comment, update}) =>{
     }
 
     return(
-        <div>   
-            <div>Sub Comments: </div>
-            {hidden ? <InputSubComment id={comment} update={()=>update()} hidden={()=>setHidden(false)}/> : <button onClick={()=>setHidden(true)}>New Comment</button>}
+        <div>
+            <button className="dark:text-black h-4 my-2 mr-2 p-1
+            text-[.7rem] bg-closeA dark:bg-text dark:rounded-none
+            leading-[.1rem]"  onClick={()=>setHidden( hidden ? false: true)}
+            >{!hidden ? "Comment" : "Cancel"}</button>
+            {hidden ? <InputSubComment id={comment} update={()=>update()} hidden={()=>setHidden(false)}/> : null}
+            <div  className="ml-4 mb-4 flex flex-col gap-4">
             {sub.Sub.map(x=>(
-                <div key={x.id}>
-                    <br/>
-                    <button onClick={()=>deleteSubComment(x.id)}>Delete</button>
-                    <div>{x.text}</div>
-                    <div>{x.link}</div>
-                    <div>{x.image}</div>
-                    <div>{x.created}</div>
-                    <Link to={`/admin/User/${x.userId}`}><div>User: </div>
-                        <IdToUserName info={x.userId}/>
-                    </Link>
+                <div key={x.id} className="bg-cardAltA dark:bg-cardAlt flex justify-between px-4 py-2 rounded-l-2xl">
+                    <img src={x.image} alt={x.image} className="w-16 bg-closeA dark:bg-card"/>
+                    <div className="w-full flex flex-col">
+                        <div>{x.text}</div>
+                        <div className="flex gap-4 text-sm">
+                            <div>{x.link}</div>
+                            <div>{x.created}</div>
+                            <Link to={`/admin/User/${x.userId}`}>
+                                <div>User: <IdToUserName info={x.userId}/></div>
+                            </Link>
+                        </div>
+                    </div>
+                    <button className="dark:text-black h-4 mt-2 mr-2 p-1
+                    text-[.7rem] bg-closeA dark:bg-text dark:rounded-none
+                    leading-[.1rem]"  onClick={()=>deleteSubComment(x.id)}>X</button>
+
                 </div>
             ))}
+            </div>
         </div>
     )
 }
 
 const MainPost = ({singlePost, change, update, id}) => {
     const [hidden, setHidden] = useState(false)
+    const [subHidden, setSubHidden] = useState(false)
 
     const inputFunction = () =>{
         change()
@@ -63,30 +75,56 @@ const MainPost = ({singlePost, change, update, id}) => {
         update()
     }
 
+    const NewCommentButton = () =>(
+        <div className="bg-backA dark:bg-back">
+            <button className="bg-cardAltA dark:bg-cardAlt dark:rounded-none my-4 py-1" 
+            onClick={()=>setHidden(true)}>New Comment</button>
+        </div>
+    )
+
 
     return(
-        <div>
+        <div className="mt-4 text-textA dark:text-text">
             {singlePost.map(x=>(
-                <div key={x.id}>
-                    <div>Post Name: {x.text}</div>
-                    <div>Created on: {x.created}</div>
-                    <Link to={`/admin/User/${x.userId}`}>User: <IdToUserName info={x.userId}/></Link>
-                    <div>Comments: </div> 
-                    {hidden ? <InputComment change={()=>inputFunction()} id={id} update={()=>update()} hidden={()=>setHidden(false)}/> : <button onClick={()=>setHidden(true)}>New Comment</button>}
-                    <div>{x.comments.map(x=>(
-                        <div key={x.id}>
-                            <br/>
-                            <button onClick={()=>commentDelete(x.id)}>Delete</button>
-                            <div>{x.image}</div>
+                <div key={x.id} className="flex flex-col gap-4 ">
+                    <div className="bg-backA dark:bg-back p-6">
+                        <div className="bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-2xl dark:rounded-none">
                             <div>{x.text}</div>
-                            <div>{x.link}</div>
-                            <Link to={`/admin/User/${x.userId}`}>
-                                <div>User: </div>
-                                <IdToUserName info={x.userId}/>
-                            </Link>
-                            <SubComment sub={x} comment={x.id} update={()=>update()}/>
+                            <div className="flex justify-between px-6">
+                                <div>Created on: {x.created}</div>
+                                <Link to={`/admin/User/${x.userId}`}>User: <IdToUserName info={x.userId}/></Link>
+                            </div>
                         </div>
-                    ))}</div>
+                    </div>
+                    {hidden ? <InputComment change={()=>inputFunction()} id={id} update={()=>update()}
+                     hidden={()=>setHidden(false)}/> : 
+                     <NewCommentButton/>}
+                    <div className="bg-backA dark:bg-back p-6 flex flex-col gap-4 ">
+                        {x.comments.map(x=>(
+                            <div key={x.id} className="bg-cardA dark:bg-card rounded-2xl dark:rounded-none">
+                                <br/>
+                                <div className="flex justify-between pb-4 px-4">
+                                    <img src={x.image} alt={x.image} className="w-16 bg-closeA dark:bg-cardAlt"/>
+                                    <div className="flex flex-col w-full">
+                                        <div>{x.text}</div>
+                                        <div className="flex justify-between w-full px-4 gap-2">
+                                            <div>{x.link}</div>
+                                            <Link to={`/admin/User/${x.userId}`}>
+                                                <div>User:<IdToUserName info={x.userId}/></div>
+                                            </Link>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button className="dark:text-black h-4 mt-2 mr-2 p-1
+                                        text-[.7rem] bg-closeA dark:bg-text dark:rounded-none
+                                        leading-[.1rem]" 
+                                         onClick={()=>commentDelete(x.id)}>X</button>
+                                    </div>
+                                </div>
+                                <SubComment sub={x} comment={x.id} update={()=>update()}/>
+                            </div>
+                        ))}
+                    </div>
                     <br/>
                 </div>
             ))}
@@ -106,38 +144,46 @@ const InputComment = ({id, update, hidden}) =>{
         setLink('')
         setImage('')
         update()
+        hidden()
     }
 
     return(
-        <div>
-            <form onSubmit={sendIt}>
-                <div>
+        <div className="bg-backA dark:bg-back p-4 flex flex-col gap-4">
+            <form id="newCommentForm" onSubmit={sendIt} className="bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-xl dark:rounded-none">
+                <div className="flex gap-4">
                     <span>Comment: </span>
-                    <input
+                    <textarea
                     type="text"
+                    rows={4}
+                    cols={30}
+                    className="w-full bg-mainA dark:bg-main"
                     value={text}
                     onChange={({target})=>setText(target.value)}
                     />
                 </div>
-                <div>
+                <div className="flex gap-4">
                     <span>Link: </span>
                     <input
                     type="text"
                     value={link}
+                    className="w-full bg-mainA dark:bg-main"
                     onChange={({target})=>setLink(target.value)}
                     />
                 </div>
-                <div>
-                    <span>Change Later for Uploads: </span>
+                <div className="flex gap-4">
                     <input
                     type="text"
                     value={image}
+                    className="w-full bg-mainA dark:bg-main"
                     onChange={({target})=>setImage(target.value)}
                     />
+                    <span className="bg-cardA dark:bg-card px-4">File...</span>
                 </div>
-                <button>Create New Comment</button>
             </form>
-            <button onClick={()=>hidden()}>Cancel</button>
+            <div className="flex gap-4">
+                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" onClick={()=>hidden()}>Cancel</button>
+                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" type="submit" form="newCommentForm">Create New</button>
+            </div>
         </div>
     )
 }
@@ -158,35 +204,42 @@ const InputSubComment = ({id, update, hidden}) =>{
     }
 
     return(
-        <div>
-            <form onSubmit={sendIt}>
-                <div>
+        <div className="mx-4">
+            <form id="newSubCommentForm" onSubmit={sendIt} className="bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-xl dark:rounded-none">
+                <div className="flex gap-4">
                     <span>Comment: </span>
-                    <input
+                    <textarea
                     type="text"
+                    className="w-full bg-mainA dark:bg-main"
+                    rows={4}
+                    cols={30}
                     value={text}
                     onChange={({target})=>setText(target.value)}
                     />
                 </div>
-                <div>
+                <div className="flex gap-4">
                     <span>Link: </span>
                     <input
                     type="text"
+                    className="w-full bg-mainA dark:bg-main"
                     value={link}
                     onChange={({target})=>setLink(target.value)}
                     />
                 </div>
-                <div>
-                    <span>Change Later for Uploads: </span>
+                <div className="flex gap-4">
                     <input
                     type="text"
+                    className="w-full bg-mainA dark:bg-main"
                     value={image}
                     onChange={({target})=>setImage(target.value)}
                     />
+                    <span className="bg-cardA dark:bg-card px-4 rounded-2xl dark:rounded-none">File...</span>
                 </div>
-                <button>Create New Comment</button>
             </form>
-            <button onClick={()=>hidden()}>Cancel</button>
+            <div className="flex gap-4 py-4">
+                    <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" onClick={()=>hidden()}>Cancel</button>
+                    <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" type="submit" form="newSubCommentForm">Create New</button>
+            </div>
         </div>
     )
 }

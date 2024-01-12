@@ -2,25 +2,27 @@ import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import forumServices from '../../services/forum'
 
-const MainForum = ({forumList, change, update}) => {
+const MainForum = ({forumList, update}) => {
     const deleteForum =async (info)=>{
         await forumServices.deleteForum({id:info})
         update()
     }
 
     return(
-    <div>
-    <button onClick={()=>change()}>New Forum</button>
+    <div className="w-full text-textA dark:text-text bg-backA dark:bg-back mt-4 p-4">
         {forumList.map(x=>(
-            <div key={x.id}>
-            <button onClick={()=>deleteForum(x.id)}>Delete</button>
-            <Link to={`/admin/Forum/${x.id}`}>
-                <div>{x.image}</div>
-                <div>Forum Name: {x.text}</div>
-                <div>Created on: {x.created}</div>
-                <div> Number of Posts: {x.posts.length}</div>
+            <div key={x.id} className="bg-cardA dark:bg-card my-4 flex justify-center rounded-xl dark:rounded-none">
+            <img src={x.image} alt={x.image} className="w-16 bg-closeA dark:bg-text ml-2 my-2 border border-white"/>
+            <Link to={`/admin/Forum/${x.id}`} className="w-full mt-2">
+                <div>{x.text}</div>
+                <div>Created: {x.created}</div>
+                <div> Total Posts: {x.posts.length}</div>
                 <br/>
             </Link>
+            <button 
+                className="dark:text-black h-4 mt-2 mr-2 p-1
+                text-[.7rem] bg-closeA dark:bg-text dark:rounded-none
+                leading-[.1rem]" onClick={()=>deleteForum(x.id)}>X</button>
             </div>
 
            
@@ -43,27 +45,33 @@ const InputForum = ({change,update}) =>{
     }
 
     return(
-        <div>
-            <button onClick={()=>change()}>Cancel</button>
-            <form onSubmit={sendIt}>
-                <div>
+        <div className="w-full bg-backA text-textA dark:text-text dark:bg-back py-4 px-4 flex flex-col gap-4">
+            <form id="newForumForm" onSubmit={sendIt} className="bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-2xl dark:rounded-none">
+                <div className="flex justify-between">
                     <span>Forum Title: </span>
-                    <input
-                    type="text"
+                    <textarea
+                    className="bg-mainA dark:bg-main"
+                    rows={4}
+                    cols={35}
                     value={text}
                     onChange={({target})=>setText(target.value)}
                     />
                 </div>
-                <div>
-                    <div>Change Later for Image Input: </div>
+                <div className="flex justify-between">
                     <input
                     type="text"
+                    className="bg-mainA dark:bg-main w-full"
                     value={image}
                     onChange={({target})=>setImage(target.value)}
-                    />
+                    />                    
+                    <div className="ml-2 px-4 bg-cardA dark:bg-card rounded-xl dark:rounded-none">File... </div>
+                    
                 </div>
-                <button>Create New Forum</button>
             </form>
+            <div className="flex justify-between gap-4">
+                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" onClick={()=>change()}>Cancel</button>
+                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" type="submit" form="newForumForm">Create New Forum</button>
+            </div>
         </div>
     )
 }
@@ -82,6 +90,15 @@ const forumCheck = async () =>{
         forumCheck()
     },[])
 
+    const NewForumButton = () =>{
+        return(
+            <div className="w-full bg-backA dark:bg-back p-2">
+                <button className="bg-cardAltA dark:bg-cardAlt px-4 py-2 dark:rounded-none text-textA dark:text-text" 
+                onClick={()=>setHidden(true)}>New Forum</button>
+            </div>
+        )
+    }
+
     if(!forumList){
         return(
             <div>Loading...</div>
@@ -89,8 +106,9 @@ const forumCheck = async () =>{
     }
 
     return(
-        <div>
-            {hidden ? <InputForum change={()=>setHidden(false)} update={()=>forumCheck()}/> : <MainForum forumList={forumList} change={()=>setHidden(true)} update={()=>forumCheck()}/> }
+        <div className="pt-4">
+            {hidden ? <InputForum change={()=>setHidden(false)} update={()=>forumCheck()}/> : <NewForumButton/> }
+            <MainForum forumList={forumList} update={()=>forumCheck()}/>
         </div>
 
     )

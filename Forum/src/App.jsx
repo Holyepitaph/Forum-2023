@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
 import './App.css'
-import { TempMenu } from './components/tempMenu'
 
 import { AdminMain } from './components/Admin/main'
 import { AdminForum } from './components/Admin/forum'
@@ -42,13 +41,13 @@ import { AdminMenu } from './components/Admin/menu'
 import { UserMenu } from './components/User/menu'
 import { BlankMenu } from './components/blankMenu'
 
-const MenuLogic = ({admin}) =>{
+const MenuLogic = ({admin,logoutFunction}) =>{
   if(admin == undefined){
     return(
       <BlankMenu/>
     )
   } else if(admin == true){
-    return <AdminMenu/>
+    return <AdminMenu logoutFunction={()=>logoutFunction()}/>
   } else{
     return <UserMenu/>
   }
@@ -82,7 +81,7 @@ function App() {
   const logoutFunction = () =>{setUserStatus("")}
 
   const Test = () =>(
-    <div>
+    <div className='w-full'>
       <div>Test A</div>
     </div>
   )
@@ -96,6 +95,15 @@ function App() {
       <div>Test C</div>
     </div>
   )
+
+  const darkModeToggle = () =>{
+    const check = document.getElementById('absolute').classList
+    if ( check.contains('dark') ){
+      check.remove('dark')
+    } else{
+      check.add('dark')
+    }
+  }
 
     // if(!userStatus){
     //   return(
@@ -112,12 +120,13 @@ function App() {
     // }
 
   return (
-    <>
+    <div className='w-full'>
       {/* <TempMenu/> */}
-      <Router>
+      <Router className="w-full">
+      
       {/* {userStatus.admin ? <AdminMenu/> : <UserMenu/>} */}
-      <MenuLogic admin={userStatus.admin}/>
-      <LoginMenu logoutFunction={logoutFunction} user={userStatus}/>
+      <MenuLogic admin={userStatus.admin} logoutFunction={logoutFunction}/>
+      <LoginMenu user={userStatus}/>
         <Routes>
     {/* Admin Routes */}
           <Route path="/admin" element={userStatus.admin ? <AdminMain userUpdate={userUpdate}/>: <Navigate replace to="/" />} />
@@ -142,8 +151,9 @@ function App() {
           <Route path="/login" element={ !userStatus ? <LoginPage userUpdate={userUpdate}/> : <Navigate replace to="/"/>} />
           <Route path="/signUp" element={<SignUp/>} />
         </Routes>
+        <button onClick={()=>darkModeToggle()}>Toggle Dark/Light Mode</button>
       </Router>
-    </>
+    </div>
   )
 }
 

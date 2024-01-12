@@ -51,6 +51,20 @@ add user attached and links to profile....again adjusted in UI in future
 add logic from admin for adding friends
 add image display for forums
 
+
+
+//Forum//
+//post//
+**add name for UserId and link to userList
+//comments//
+**add name for UserId and link to userList
+//singleMessage//
+--Consider delete own message
+//userlist//
+Do not display blocked/ private unless friends
+//host//
+seperate friends list between friends/blocked//hide otherside blocked?
+
 NotLoggedIn
 Conside making Forums viewable but not able to be commented on without signUp.
 --No Messaging

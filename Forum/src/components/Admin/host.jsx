@@ -50,47 +50,51 @@ const InfoChange = ({hidden,update,info}) =>{
     }
 
     return(
-        <>
+        <div className="p-4">
             {error}
-            <form onSubmit={sendIt}>
-                <div>
-                  <span >Email:</span>
+            <form id="inputUpdateForm" className="bg-cardAltA dark:bg-cardAlt flex flex-col gap-4 py-4 px-4" onSubmit={sendIt}>
+            <div className="flex flex-col sm:flex-row justify-between gap-2">
+                  <span className="sm:w-1/2">Email:</span>
                   <input 
                     type='email'
+                    className="bg-mainA dark:bg-main w-full pl-4"
                     value={email}
                     onChange={({target})=>setEmail(target.value)}
                   />
                 </div>
-                <div>
-                  <span>Phone Number: </span>
+                <div className="flex flex-col sm:flex-row justify-between gap-2">
+                  <span className="sm:w-1/2">Phone Number: </span>
                   <input
                     type="text"
+                    className="bg-mainA dark:bg-main w-full pl-4"
                     value={phone}
                     onChange={({target})=>setPhone(target.value)}
                   />
                 </div>
-                <div>
-                  <span>Password: </span>
+                <div className="flex flex-col sm:flex-row justify-between gap-2">
+                  <span className="sm:w-1/2">Password: </span>
                   <input
                     type="text"
+                    className="bg-mainA dark:bg-main w-full pl-4"
                     value={password}
                     onChange={({target})=>setPassword(target.value)}
                   />
                 </div>
-                <div>
-                  <span>Re-type Password: </span>
+                <div className="flex flex-col sm:flex-row justify-between gap-2">
+                  <span className="sm:w-1/2">Re-type Password: </span>
                   <input
                     type="text"
+                    className="bg-mainA dark:bg-main w-full pl-4"
                     value={passwordCheck}
                     onChange={({target})=>setPasswordCheck(target.value)}
                   />
                 </div>
-                <button type="submit">
-                  Update Information
-                </button>
             </form>
-            <button onClick={()=>hidden()}>Cancel</button>
-        </>
+            <div className="flex justify-between gap-4 pt-4">
+                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" onClick={()=>hidden()}>Cancel</button>
+                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" type="submit" form="inputUpdateForm">Confirm</button>
+            </div>
+        </div>
     )
 }
 
@@ -116,11 +120,12 @@ const BlockList = ({info}) =>{
         } else{
             //For blocked display
             return(
-                <Link to={`/admin/User/${info.id}`} key={info.id}>
-                    <br/>
-                    <div>Username: {info.username}</div>
-                    <div>Name: {info.name}</div>
-                    <div>Admin Status: {info.admin ? "True" : "False"}</div>
+                <Link  className="bg-cardAltA dark:bg-cardAlt ml-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none" to={`/admin/User/${info.id}`} key={info.id}>
+                    <div>Username:</div> <div>{info.username}</div>
+                    <div className="border border-cardA dark:border-card w-full col-span-2"/>
+                    <div>Name:</div> <div>{info.name}</div>
+                    <div className="border border-cardA dark:border-card w-full col-span-2"/>
+                    <div>Admin Status:</div> <div>{info.admin ? "True" : "False"}</div>
                 </Link>
             )
         }
@@ -149,12 +154,13 @@ const FriendsList = ({info}) =>{
         if(status[0].status == 'friend'){
             //For Friends display info
             return(
-                <Link to={`/admin/User/${info.id}`} key={info.id}>
-                    <br/>
-                    <div>Pending Acceptance</div>
-                    <div>Username: {info.username}</div>
-                    <div>Name: {info.name}</div>
-                    <div>Admin Status: {info.admin ? "True" : "False"}</div>
+                <Link  className="bg-cardAltA dark:bg-cardAlt ml-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none" to={`/admin/User/${info.id}`} key={info.id}>
+                    <div className="col-span-2 text-center">Pending Acceptance</div>
+                    <div>Username:</div> <div>{info.username}</div>
+                    <div className="border border-cardA dark:border-card w-full col-span-2"/>
+                    <div>Name:</div> <div>{info.name}</div>
+                    <div className="border border-cardA dark:border-card w-full col-span-2"/>
+                    <div>Admin Status:</div> <div>{info.admin ? "True" : "False"}</div>
                 </Link>
             )
         } else{
@@ -166,11 +172,12 @@ const FriendsList = ({info}) =>{
     } else{
         //for confirmed friends display info
         return(
-            <Link to={`/admin/User/${info.id}`} key={info.id}>
-                <br/>
-                <div>Username: {info.username}</div>
-                <div>Name: {info.name}</div>
-                <div>Admin Status: {info.admin ? "True" : "False"}</div>
+            <Link  className="bg-cardAltA dark:bg-cardAlt ml-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none" to={`/admin/User/${info.id}`} key={info.id}>
+                    <div>Username:</div> <div>{info.username}</div>
+                    <div className="border border-cardA dark:border-card w-full col-span-2"/>
+                    <div>Name:</div> <div>{info.name}</div>
+                    <div className="border border-cardA dark:border-card w-full col-span-2"/>
+                    <div>Admin Status:</div> <div>{info.admin ? "True" : "False"}</div>
             </Link>
         )
     }
@@ -205,42 +212,60 @@ export const AdminHost = ({userUpdate, user}) =>{
         singleUser= users.filter(x=>x.id == user)
     }
     return(
-        <div>
-            {hidden ? <InfoChange update={()=>specialUpdate()} hidden={()=>setHidden(false)} info={singleUser.map(x=>x.username)}/> : <button onClick={()=>setHidden(true)}>Update Information</button>}
+        <div className="text-textA dark:text-text">
+            <div className="bg-backA dark:bg-back mt-4">
+                {hidden ? <InfoChange update={()=>specialUpdate()} hidden={()=>setHidden(false)}
+                 info={singleUser.map(x=>x.username)}/> : 
+                 <button
+                  className="bg-cardAltA dark:bg-cardAlt m-4
+                  rounded-xl dark:rounded-none p-2"
+                  onClick={()=>setHidden(true)}>
+                 Update Information</button>}
+            </div>
+            <div className="bg-backA dark:bg-back mt-4">
             {singleUser.map(x=>(
-                <div key={x.id}>
-                    <div>Username: {x.username}</div>
-                    <div>Name: {x.name}</div>
-                    <div>Admin Status: {x.admin}</div>
-                    <div>Privacy Status: {x.private ? "True" : "False"} </div>
-                    <div>Email: {x.email}</div>
-                    <div>Phone Number: {x.phone}</div>
-                    <div>Image: {x.image}</div>
-                    <div>Total Messages: {x.messages.length}</div>
-                    <div>
-                        <br/>
-                        <div>Friends List: </div>
-                        {x.friends.map(x=><FriendsList key={x.id} info={x}/>)}
-                        <br/>
-                        <div>Block List: </div>
-                        {x.friends.map(x=><BlockList key={x.id} info={x}/>)}
-                    <div>
-                        <br/>
-                        <div>Forums List: </div>
+                <div key={x.id} className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
+                    <div className="bg-cardA dark:bg-card py-4 grid grid-cols-2 gap-1 px-4 text-left rounded-2xl dark:rounded-none">
+                        <div>Image:</div> <div>{x.image}</div>
+                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div>Username:</div> <div>{x.username}</div>
+                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div>Name:</div> <div>{x.name}</div>
+                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div>Admin Status:</div> <div>{x.admin}</div>
+                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div>Privacy Status:</div> <div>{x.private ? "True" : "False"} </div>
+                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div>Email:</div> <div>{x.email}</div>
+                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div>Phone Number:</div> <div>{x.phone}</div>
+                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div>Total Messages:</div> <div>{x.messages.length}</div>
+                    </div>
+                    <div className="bg-cardA dark:bg-card flex flex-col  rounded-2xl dark:rounded-none">
+                        <div className="my-4">Forums List: </div>
                         {x.forums.map(x=>(
-                        <Link to={`/admin/Forum/${x.id}`} key={x.id}>
-                            <br/>
-                            <div>Image: {x.image}</div>
-                            <div>Created Date: {x.created}</div>
-                            <div>Title: {x.text}</div>
+                        <Link className="bg-cardAltA dark:bg-cardAlt ml-4 my-4 pt-6 rounded-l-2xl dark:rounded-none" to={`/admin/Forum/${x.id}`} key={x.id}>
+                            <div>{x.image}</div>
+                            <div>{x.text}</div>
+                            <div>{x.created}</div>
                             <br/>
                         </Link>
                     ))}
-                    </div>    
+                    </div>  
+                    <div className="bg-cardA dark:bg-card flex flex-col py-4  rounded-2xl dark:rounded-none">
+                        <div className="mb-4">Friends List: </div>
+                        {x.friends.map(x=><FriendsList key={x.id} info={x}/>)}
                     </div>
+                    <div className="bg-cardA dark:bg-card flex flex-col py-4 rounded-2xl dark:rounded-none">
+                        <div className="mb-4">Block List: </div>
+                        {x.friends.map(x=><BlockList key={x.id} info={x}/>)}
+                    </div>
+  
                     <br/>
                 </div>
             ))}
+            </div>
         </div>
 
     )

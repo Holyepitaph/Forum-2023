@@ -38,9 +38,9 @@ const SubComment = ({sub,comment, update}) =>{
             {hidden ? <InputSubComment id={comment} update={()=>update()} hidden={()=>setHidden(false)}/> : null}
             <div  className="ml-4 mb-4 flex flex-col gap-4">
             {sub.Sub.map(x=>(
-                <div key={x.id} className="bg-cardAltA dark:bg-cardAlt flex justify-between px-4 py-2 rounded-l-2xl">
-                    <img src={x.image} alt={x.image} className="w-16 bg-closeA dark:bg-card"/>
-                    <div className="w-full flex flex-col">
+                <div key={x.id} className="bg-cardAltA dark:bg-cardAlt grid grid-cols-12 justify-between px-4 py-2 rounded-l-2xl">
+                    <img src={x.image} alt={x.image} className="col-span-12 sm:col-span-2 h-24 bg-closeA dark:bg-card"/>
+                    <div className="col-span-11 sm:col-span-9 w-full flex flex-col justify-between py-2">
                         <div>{x.text}</div>
                         <div className="flex gap-4 text-sm">
                             <div>{x.link}</div>
@@ -87,8 +87,8 @@ const MainPost = ({singlePost, change, update, id}) => {
         <div className="mt-4 text-textA dark:text-text">
             {singlePost.map(x=>(
                 <div key={x.id} className="flex flex-col gap-4 ">
-                    <div className="bg-backA dark:bg-back p-6">
-                        <div className="bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-2xl dark:rounded-none">
+                    <div className="bg-backA dark:bg-back p-6 ">
+                        <div className="bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-2xl dark:rounded-none  min-w-0 px-2">
                             <div>{x.text}</div>
                             <div className="flex justify-between px-6">
                                 <div>Created on: {x.created}</div>
@@ -101,11 +101,11 @@ const MainPost = ({singlePost, change, update, id}) => {
                      <NewCommentButton/>}
                     <div className="bg-backA dark:bg-back p-6 flex flex-col gap-4 ">
                         {x.comments.map(x=>(
-                            <div key={x.id} className="bg-cardA dark:bg-card rounded-2xl dark:rounded-none">
+                            <div key={x.id} className="bg-cardA dark:bg-card rounded-2xl dark:rounded-none ">
                                 <br/>
-                                <div className="flex justify-between pb-4 px-4">
-                                    <img src={x.image} alt={x.image} className="w-16 bg-closeA dark:bg-cardAlt"/>
-                                    <div className="flex flex-col w-full">
+                                <div className="grid grid-cols-12 pb-4 px-4  min-w-0 px-2">
+                                    <img src={x.image} alt={x.image} className="col-span-12 sm:col-span-2 h-24 bg-closeA dark:bg-cardAlt"/>
+                                    <div className="col-span-11 sm:col-span-9 flex flex-col justify-between w-full py-2">
                                         <div>{x.text}</div>
                                         <div className="flex justify-between w-full px-4 gap-2">
                                             <div>{x.link}</div>
@@ -150,7 +150,7 @@ const InputComment = ({id, update, hidden}) =>{
     return(
         <div className="bg-backA dark:bg-back p-4 flex flex-col gap-4">
             <form id="newCommentForm" onSubmit={sendIt} className="bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-xl dark:rounded-none">
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
                     <span>Comment: </span>
                     <textarea
                     type="text"
@@ -181,8 +181,10 @@ const InputComment = ({id, update, hidden}) =>{
                 </div>
             </form>
             <div className="flex gap-4">
-                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" onClick={()=>hidden()}>Cancel</button>
-                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" type="submit" form="newCommentForm">Create New</button>
+                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]"
+                 onClick={()=>hidden()}>Cancel</button>
+                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]"
+                 type="submit" form="newCommentForm">Create</button>
             </div>
         </div>
     )
@@ -206,7 +208,7 @@ const InputSubComment = ({id, update, hidden}) =>{
     return(
         <div className="mx-4">
             <form id="newSubCommentForm" onSubmit={sendIt} className="bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-xl dark:rounded-none">
-                <div className="flex gap-4">
+                <div className="flex flex-col sm:flex-row gap-4">
                     <span>Comment: </span>
                     <textarea
                     type="text"
@@ -236,9 +238,11 @@ const InputSubComment = ({id, update, hidden}) =>{
                     <span className="bg-cardA dark:bg-card px-4 rounded-2xl dark:rounded-none">File...</span>
                 </div>
             </form>
-            <div className="flex gap-4 py-4">
-                    <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" onClick={()=>hidden()}>Cancel</button>
-                    <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" type="submit" form="newSubCommentForm">Create New</button>
+            <div className="flex gap-2 py-4">
+                    <button className="bg-cardAltA px-0 dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" 
+                    onClick={()=>hidden()}>Cancel</button>
+                    <button className="bg-cardAltA px-0 dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]"
+                     type="submit" form="newSubCommentForm">Create</button>
             </div>
         </div>
     )

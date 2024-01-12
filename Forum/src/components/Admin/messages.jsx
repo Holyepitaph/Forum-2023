@@ -65,15 +65,24 @@ export const AdminMessage = ({userUpdate, user}) =>{
     } 
     return(
         <div>
-            <div>Maybe needs to adjust whom the conversations are between for other users conversations and for admin to user</div>
-            <div>Personal Messages: </div>
-            {messages.map(x=>(
-                <PersonalMessageLogic key={x.id} info={x} user={user}/>
-            ))}
-            <div>All Users Messages:</div>
-            {messages.map(x=>(
-                <AllMessageLogic key={x.id} info={x} user={user}/>
-            ))}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-textA dark:text-text">
+                <div className="bg-backA dark:bg-back flex flex-col gap-4 py-4 mt-4 px-4 w-full">
+                    <div className="bg-cardAltA dark:bg-cardAlt rounded-xl dark:rounded-none">Personal Messages: </div>
+                    {messages.map(x=>(
+                        <div key={x.id} className="flex flex-col gap-4 bg-cardA dark:bg-card rounded-2xl dark:rounded-none">
+                            <PersonalMessageLogic info={x} user={user}/>
+                        </div>
+                    ))}
+                </div>
+                <div className="bg-backA dark:bg-back flex flex-col gap-2 py-4 mt-4 px-4 w-full">
+                    <div className="bg-cardAltA dark:bg-cardAlt rounded-xl dark:rounded-none">All Users Messages:</div>
+                    {messages.map(x=>(
+                        <div key={x.id} className="flex flex-col gap-4 bg-cardA dark:bg-card rounded-2xl dark:rounded-none">
+                            <AllMessageLogic info={x} user={user}/>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
 
     )

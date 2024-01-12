@@ -26,7 +26,7 @@ Message.init({
     references: { model: 'message_boards', key: 'id' }
   },
   created:{
-    type: DataTypes.DATE,
+    type: DataTypes.DATEONLY,
     defaultValue: DataTypes.NOW
   }
 }, {

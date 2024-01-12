@@ -49,7 +49,7 @@ const MenuLogic = ({admin,logoutFunction}) =>{
   } else if(admin == true){
     return <AdminMenu logoutFunction={()=>logoutFunction()}/>
   } else{
-    return <UserMenu/>
+    return <UserMenu  logoutFunction={()=>logoutFunction()}/>
   }
 
 }

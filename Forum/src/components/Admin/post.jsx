@@ -142,10 +142,10 @@ const InputComment = ({id, update, hidden}) =>{
         const regEx = /.jpeg|.jpg|.gif|.png|.webp/
         const regMatch = e.target[2].files[0].name.match(regEx)
         const imageTest = await imageServices.getAll()
-        const id = Math.max(...imageTest.map(x=>x.id))
-        const prep = id + regMatch[0]
+        const idAlt = Math.max(...imageTest.map(x=>x.id))
+        const prep = idAlt + regMatch[0]
         const newForum = await commentServices.newComment({text:text,link:link, image:prep,postId: id})
-        await imageServices.createOrder({file: e.target[2].files, id: id})
+        await imageServices.createOrder({file: e.target[2].files, id: idAlt})
         setText('')
         setLink('')
         update()
@@ -198,10 +198,10 @@ const InputSubComment = ({id, update, hidden}) =>{
         const regEx = /.jpeg|.jpg|.gif|.png|.webp/
         const regMatch = e.target[2].files[0].name.match(regEx)
         const imageTest = await imageServices.getAll()
-        const id = Math.max(...imageTest.map(x=>x.id))
-        const prep = id + regMatch[0]
+        const idAlt = Math.max(...imageTest.map(x=>x.id))
+        const prep = idAlt + regMatch[0]
         const newForum = await commentServices.newSubComment({text:text,link:link, image:prep,postId: id})
-        await imageServices.createOrder({file: e.target[2].files, id: id})
+        await imageServices.createOrder({file: e.target[2].files, id: idAlt})
         setText('')
         setLink('')
         update()

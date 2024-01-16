@@ -147,7 +147,6 @@ const InputComment = ({id, update, hidden}) =>{
         await imageServices.createOrder({file: e.target[2].files})
         setText('')
         setLink('')
-        setImage('')
         update()
         hidden()
     }
@@ -203,7 +202,6 @@ const InputSubComment = ({id, update, hidden}) =>{
         await imageServices.createOrder({file: e.target[2].files})
         setText('')
         setLink('')
-        setImage('')
         update()
         hidden()
     }

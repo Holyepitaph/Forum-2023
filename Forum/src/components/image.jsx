@@ -12,7 +12,7 @@ export const ImagesViewer = ({info,change}) =>{
   }
 
   export const ImagesViewerAlt = ({info,change}) =>{
-    const baseUrl = "../../images/"
+    const baseUrl = "/images/"
     const image = baseUrl + info 
     return(
       <>

@@ -25,7 +25,8 @@ const InfoChange = ({hidden,update,info}) =>{
             const regEx = /.jpeg|.jpg|.gif|.png|.webp/
             const regMatch = e.target[4].files[0].name.match(regEx)
             const imageTest = await imageServices.getAll()
-            const prep = imageTest.length + regMatch[0]
+            const id = Math.max(...imageTest.map(x=>x.id))
+            const prep = id + regMatch[0]
             const newUser = {
                 email: email ? email : null,
                 password: password ? password : null,
@@ -35,7 +36,7 @@ const InfoChange = ({hidden,update,info}) =>{
             }
             console.log(newUser)
             await userServices.updateUser(newUser)
-            await imageServices.createOrder({file: e.target[4].files, id: imageTest.length})
+            await imageServices.createOrder({file: e.target[4].files, id: id})
             setError(`Information Successfully Updated`)
             setTimeout(() => {
                 setError(null)

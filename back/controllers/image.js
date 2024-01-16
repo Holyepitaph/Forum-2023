@@ -9,7 +9,7 @@ const { tokenExtractor, isAdmin } = require('../util/middleware')
   router.post('/post/:id',tokenExtractor,isAdmin, async (req, res) => {
     try {
         console.log(req.files)
-        if (!req.files || req.files[0].size < 10000000) {
+        if (!req.files) {
             res.send({
                 status: "failed",
                 message: "No file uploaded",

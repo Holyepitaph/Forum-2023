@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import forumServices from '../../services/forum'
+import imageServices from '../../services/images'
+import {ImagesViewer, ImagesViewerAlt} from '../image'
 
 const MainForum = ({forumList, update}) => {
     const deleteForum =async (info)=>{
@@ -12,7 +14,7 @@ const MainForum = ({forumList, update}) => {
     <div className="w-full text-textA dark:text-text bg-backA dark:bg-back mt-4 p-4">
         {forumList.map(x=>(
             <div key={x.id} className="bg-cardA dark:bg-card my-4 grid grid-cols-12 justify-center rounded-xl dark:rounded-none">
-                <img src={x.image} alt={x.image} className=" col-span-12 h-24 sm:col-span-2 bg-closeA dark:bg-text ml-2 my-2 border border-white"/>
+                <ImagesViewer info={x.image} change={"col-span-12 h-24 sm:col-span-2 bg-closeA dark:bg-text ml-2 my-2 border border-white"}/>
                 <Link to={`/admin/Forum/${x.id}`} className="w-full h-full col-span-11 sm:col-span-9 mt-2 flex flex-col justify-between">
                     <div>{x.text}</div>
                     <div>Created: {x.created}</div>
@@ -37,7 +39,12 @@ const InputForum = ({change,update}) =>{
 
     const sendIt = async (e) =>{
         e.preventDefault()
-        const newForum = await forumServices.newForum({text:text, image:image})
+        const regEx = /.jpeg|.jpg|.gif|.png|.webp/
+        const regMatch = e.target[1].files[0].name.match(regEx)
+        const imageTest = await imageServices.getAll()
+        const prep = imageTest.length +1 + regMatch[0]
+        const newForum = await forumServices.newForum({text:text, image:prep})
+        await imageServices.createOrder({file: e.target[1].files})
         setText('')
         setImage('')
         update()
@@ -58,14 +65,7 @@ const InputForum = ({change,update}) =>{
                     />
                 </div>
                 <div className="flex justify-between">
-                    <input
-                    type="text"
-                    className="bg-mainA dark:bg-main w-full"
-                    value={image}
-                    onChange={({target})=>setImage(target.value)}
-                    />                    
-                    <div className="ml-2 px-4 bg-cardA dark:bg-card rounded-xl dark:rounded-none">File... </div>
-                    
+                    <input className="bg-mainA dark:bg-main w-full" type="file" />                  
                 </div>
             </form>
             <div className="flex justify-between gap-4">

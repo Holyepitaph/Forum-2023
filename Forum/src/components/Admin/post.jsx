@@ -3,7 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom"
 import postServices from '../../services/post'
 import commentServices from '../../services/comment'
 import userServices from '../../services/user'
-
+import {ImagesViewer, ImagesViewerAlt} from '../image'
 
 const IdToUserName = ({info}) =>{
     const [name,setName] = useState('')
@@ -39,7 +39,7 @@ const SubComment = ({sub,comment, update}) =>{
             <div  className="ml-4 mb-4 flex flex-col gap-4">
             {sub.Sub.map(x=>(
                 <div key={x.id} className="bg-cardAltA dark:bg-cardAlt grid grid-cols-12 justify-between px-4 py-2 rounded-l-2xl">
-                    <img src={x.image} alt={x.image} className="col-span-12 sm:col-span-2 h-24 bg-closeA dark:bg-card"/>
+                    <ImagesViewer info={x.image} change={"col-span-12 sm:col-span-2 h-24 bg-closeA dark:bg-card"}/>
                     <div className="col-span-11 sm:col-span-9 w-full flex flex-col justify-between py-2">
                         <div>{x.text}</div>
                         <div className="flex gap-4 text-sm">
@@ -104,7 +104,7 @@ const MainPost = ({singlePost, change, update, id}) => {
                             <div key={x.id} className="bg-cardA dark:bg-card rounded-2xl dark:rounded-none ">
                                 <br/>
                                 <div className="grid grid-cols-12 pb-4 px-4  min-w-0 px-2">
-                                    <img src={x.image} alt={x.image} className="col-span-12 sm:col-span-2 h-24 bg-closeA dark:bg-cardAlt"/>
+                                    <ImagesViewer info={x.image} change={"col-span-12 sm:col-span-2 h-24 bg-closeA dark:bg-cardAlt"}/>
                                     <div className="col-span-11 sm:col-span-9 flex flex-col justify-between w-full py-2">
                                         <div>{x.text}</div>
                                         <div className="flex justify-between w-full px-4 gap-2">

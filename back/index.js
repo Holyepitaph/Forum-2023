@@ -13,13 +13,13 @@ const postRouter = require('./controllers/posts')
 const friendRouter = require('./controllers/friends')
 const messageRouter = require('./controllers/message')
 const commentRouter = require('./controllers/comments')
+const imageRouter = require('./controllers/image')
 
 app.use(
   fileupload({
       createParentPath: true,
   }),
 );
-const imageRouter = require('./controllers/image')
 
 app.use(cors())
 app.use(express.json())

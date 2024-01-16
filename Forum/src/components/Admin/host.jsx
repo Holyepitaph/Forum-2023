@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import userServices from '../../services/user'
 import friendServices from '../../services/friend'
+import {ImagesViewer, ImagesViewerAlt} from '../image'
+
 
 const InfoChange = ({hidden,update,info}) =>{
     const [email, setEmail] = useState('')
@@ -226,7 +228,7 @@ export const AdminHost = ({userUpdate, user}) =>{
             {singleUser.map(x=>(
                 <div key={x.id} className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
                     <div className="bg-cardA dark:bg-card py-4 grid grid-cols-2 gap-1 px-4 text-left rounded-2xl dark:rounded-none">
-                        <div>Image:</div> <div>{x.image}</div>
+                        <ImagesViewer info={x.image}/>
                         <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
                         <div>Username:</div> <div>{x.username}</div>
                         <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>

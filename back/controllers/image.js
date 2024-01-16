@@ -1,6 +1,6 @@
 const bcrypt = require('bcrypt')
 const router = require('express').Router()
-
+const Image = require('../models/image')
 
 const { tokenExtractor, isAdmin } = require('../util/middleware')
 
@@ -38,7 +38,8 @@ const { tokenExtractor, isAdmin } = require('../util/middleware')
 //  Adds new categoryItem with itemId,categoryId
 router.get('/down', async (req, res) => {
     try{
-        res.send("/uploads/1.jpg")
+        const total = await Image.findAll({})
+        res.send(total)
     }catch{
      return res.status(400).json({error})
     }

@@ -7,6 +7,7 @@ const SubComment = require('./subComment')
 const Message = require('./message')
 const MessageBoard = require('./messageBoard')
 const MessageParticipants = require('./messageParticipant')
+const Image = require('./image')
 
 const { sequelize } = require('../util/db')
 
@@ -50,5 +51,6 @@ module.exports = {
     SubComment,
     Message,
     MessageBoard,
-    MessageParticipants
+    MessageParticipants,
+    Image
 }

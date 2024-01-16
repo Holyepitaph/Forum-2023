@@ -3,6 +3,7 @@ import { Link, useParams, useNavigate } from "react-router-dom"
 import postServices from '../../services/post'
 import commentServices from '../../services/comment'
 import userServices from '../../services/user'
+import imageServices from '../../services/images'
 import {ImagesViewer, ImagesViewerAlt} from '../image'
 
 const IdToUserName = ({info}) =>{
@@ -135,11 +136,15 @@ const MainPost = ({singlePost, change, update, id}) => {
 const InputComment = ({id, update, hidden}) =>{
     const [text, setText] = useState('')
     const [link, setLink] = useState('')
-    const [image, setImage] = useState('')
 
     const sendIt = async (e) =>{
         e.preventDefault()
-        const newForum = await commentServices.newComment({text:text,link:link, image:image,postId: id})
+        const regEx = /.jpeg|.jpg|.gif|.png|.webp/
+        const regMatch = e.target[2].files[0].name.match(regEx)
+        const imageTest = await imageServices.getAll()
+        const prep = imageTest.length +1 + regMatch[0]
+        const newForum = await commentServices.newComment({text:text,link:link, image:prep,postId: id})
+        await imageServices.createOrder({file: e.target[2].files})
         setText('')
         setLink('')
         setImage('')
@@ -171,13 +176,7 @@ const InputComment = ({id, update, hidden}) =>{
                     />
                 </div>
                 <div className="flex gap-4">
-                    <input
-                    type="text"
-                    value={image}
-                    className="w-full bg-mainA dark:bg-main"
-                    onChange={({target})=>setImage(target.value)}
-                    />
-                    <span className="bg-cardA dark:bg-card px-4">File...</span>
+                    <input className="w-full bg-mainA dark:bg-main" type="file" />                  
                 </div>
             </form>
             <div className="flex gap-4">
@@ -193,11 +192,15 @@ const InputComment = ({id, update, hidden}) =>{
 const InputSubComment = ({id, update, hidden}) =>{
     const [text, setText] = useState('')
     const [link, setLink] = useState('')
-    const [image, setImage] = useState('')
 
     const sendIt = async (e) =>{
         e.preventDefault()
-        const newForum = await commentServices.newSubComment({text:text,link:link, image:image,postId: id})
+        const regEx = /.jpeg|.jpg|.gif|.png|.webp/
+        const regMatch = e.target[2].files[0].name.match(regEx)
+        const imageTest = await imageServices.getAll()
+        const prep = imageTest.length +1 + regMatch[0]
+        const newForum = await commentServices.newSubComment({text:text,link:link, image:prep,postId: id})
+        await imageServices.createOrder({file: e.target[2].files})
         setText('')
         setLink('')
         setImage('')
@@ -229,13 +232,7 @@ const InputSubComment = ({id, update, hidden}) =>{
                     />
                 </div>
                 <div className="flex gap-4">
-                    <input
-                    type="text"
-                    className="w-full bg-mainA dark:bg-main"
-                    value={image}
-                    onChange={({target})=>setImage(target.value)}
-                    />
-                    <span className="bg-cardA dark:bg-card px-4 rounded-2xl dark:rounded-none">File...</span>
+                    <input className="w-full bg-mainA dark:bg-main" type="file" />                  
                 </div>
             </form>
             <div className="flex gap-2 py-4">

@@ -32,6 +32,7 @@ const delUser = async (id) => {
       admin: thing.admin=="" ? null: thing.admin,
       email: thing.email=="" ? null: thing.email,
       phone: thing.phone=="" ? null: thing.phone,
+      image: thing.image=="" ? null: thing.image,
       password: thing.password=="" ? null : thing.password
     }
   

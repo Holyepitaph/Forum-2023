@@ -60,6 +60,7 @@ router.put('/:username', tokenExtractor, async (req, res) => {
       if(req.decodedToken.id == user.id){
         user.email = req.body.email ? req.body.email : user.email
         user.phone = req.body.phone ? req.body.phone : user.phone
+        user.image = req.body.phonimagee ? req.body.image : user.image
         if(req.body.private === false){
         user.private = false
         }if (req.body.private === true){
@@ -80,6 +81,7 @@ router.put('/:username', tokenExtractor, async (req, res) => {
         }
       user.email = req.body.email ? req.body.email : user.email
       user.phone = req.body.phone ? req.body.phone : user.phone
+      user.image = req.body.image ? req.body.image : user.image
       if(req.body.private === false){
         user.private = false
         }if (req.body.private === true){

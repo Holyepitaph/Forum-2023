@@ -2,6 +2,7 @@ import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import userServices from '../../services/user'
 import friendServices from '../../services/friend'
+import imageServices from '../../services/images'
 import {ImagesViewer, ImagesViewerAlt} from '../image'
 
 
@@ -21,14 +22,20 @@ const InfoChange = ({hidden,update,info}) =>{
         }
         e.preventDefault()
         if(password == passwordCheck || !password){
+            const regEx = /.jpeg|.jpg|.gif|.png|.webp/
+            const regMatch = e.target[4].files[0].name.match(regEx)
+            const imageTest = await imageServices.getAll()
+            const prep = imageTest.length +1 + regMatch[0]
             const newUser = {
                 email: email ? email : null,
                 password: password ? password : null,
                 phone: phone ? phone : null,
+                image: prep ? prep : null,
                 username: info
             }
             console.log(newUser)
             await userServices.updateUser(newUser)
+            await imageServices.createOrder({file: e.target[4].files})
             setError(`Information Successfully Updated`)
             setTimeout(() => {
                 setError(null)
@@ -90,6 +97,9 @@ const InfoChange = ({hidden,update,info}) =>{
                     value={passwordCheck}
                     onChange={({target})=>setPasswordCheck(target.value)}
                   />
+                </div>
+                <div className="flex gap-4">
+                    <input className="w-full bg-mainA dark:bg-main" type="file" />                  
                 </div>
             </form>
             <div className="flex justify-between gap-4 pt-4">

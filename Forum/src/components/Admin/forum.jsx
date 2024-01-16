@@ -42,9 +42,9 @@ const InputForum = ({change,update}) =>{
         const regEx = /.jpeg|.jpg|.gif|.png|.webp/
         const regMatch = e.target[1].files[0].name.match(regEx)
         const imageTest = await imageServices.getAll()
-        const prep = imageTest.length +1 + regMatch[0]
+        const prep = imageTest.length + regMatch[0]
         const newForum = await forumServices.newForum({text:text, image:prep})
-        await imageServices.createOrder({file: e.target[1].files})
+        await imageServices.createOrder({file: e.target[1].files , id: imageTest.length})
         setText('')
         setImage('')
         update()

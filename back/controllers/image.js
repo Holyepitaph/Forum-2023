@@ -19,7 +19,7 @@ const { tokenExtractor, isAdmin } = require('../util/middleware')
             const regEx = /.jpeg|.jpg|.gif|.png|.webp/
             const name = file.name.match(regEx)
             file.mv(__dirname + '/uploads/' + req.params.id + name);
-
+            await Image.create({})
             res.send({
                 status: "success",
                 message: "File is uploaded",

@@ -19,6 +19,7 @@ const createOrder = async (thing) =>{
   }
   console.log(thing)
   const sendIt = {
+    id: {...thing.id},
     file: {...thing.file}
   }
   const request = await axios.post(`${baseUrl}/post/${sendIt.id}`,sendIt.file, config)

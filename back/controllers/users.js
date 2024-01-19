@@ -9,7 +9,7 @@ const saltRounds = 11
 router.get('/',tokenExtractor, async (req, res) =>{
   const user = await User.findByPk(req.decodedToken.id,{include:[Message, MessageBoard,"friends",Forum],
   attributes:{ exclude:["passwordHash","created"]}})  
-  res.json(user)
+  return res.json(user)
 })
 
 router.get('/all',tokenExtractor, async (req, res) =>{

@@ -1,17 +1,17 @@
 import { Link } from "react-router-dom"
 import { LogoutButton } from "../logout"
+import {MenuTheme} from '../../theme'
 
 export const UserMenu = ({logoutFunction}) =>{
 
     return(
-        <div>
-            <Link to='/user'> User /</Link>
-            <Link to='/user/Forum'> User Forum /</Link>
-            <Link to='/user/Messages'> User Message /</Link>
-            <Link to='/user/User'> User List /</Link>
+        <div className={MenuTheme.main}>
+            <Link className={MenuTheme.link} to='/user'>Host</Link>
+            <Link className={MenuTheme.link} to='/user/Forum'>Forum</Link>
+            <Link className={MenuTheme.link} to='/user/Messages'>Message</Link>
+            <Link className={MenuTheme.link} to='/user/User'>Users</Link>
             <LogoutButton logoutFunction={()=>logoutFunction()}
-            style={"bg-cardAltA dark:bg-cardAlt p-1 dark:rounded-none rounded-3xl dark:rounded-none"}/>
-
+            style={MenuTheme.linkAltB}/>
         </div>
     )
 }

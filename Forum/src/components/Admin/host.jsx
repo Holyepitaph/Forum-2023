@@ -5,6 +5,7 @@ import friendServices from '../../services/friend'
 import imageServices from '../../services/images'
 import {ImagesViewer, ImagesViewerAlt} from '../image'
 
+import {HostTheme, InputTheme} from '../../theme'
 
 const InfoChange = ({hidden,update,info}) =>{
     const [email, setEmail] = useState('')
@@ -62,50 +63,50 @@ const InfoChange = ({hidden,update,info}) =>{
     return(
         <div className="p-4">
             {error}
-            <form id="inputUpdateForm" className="bg-cardAltA dark:bg-cardAlt flex flex-col gap-4 py-4 px-4" onSubmit={sendIt}>
-            <div className="flex flex-col sm:flex-row justify-between gap-2">
-                  <span className="sm:w-1/2">Email:</span>
+            <form id="inputUpdateForm" className={HostTheme.InfoChange.main} onSubmit={sendIt}>
+            <div className={HostTheme.InfoChange.form}>
+                  <span className={HostTheme.InfoChange.text}>Email:</span>
                   <input 
                     type='email'
-                    className="bg-mainA dark:bg-main w-full pl-4"
+                    className={InputTheme.mainAlt}
                     value={email}
                     onChange={({target})=>setEmail(target.value)}
                   />
                 </div>
-                <div className="flex flex-col sm:flex-row justify-between gap-2">
-                  <span className="sm:w-1/2">Phone Number: </span>
+                <div className={HostTheme.InfoChange.form}>
+                  <span className={HostTheme.InfoChange.text}>Phone Number: </span>
                   <input
                     type="text"
-                    className="bg-mainA dark:bg-main w-full pl-4"
+                    className={InputTheme.mainAlt}
                     value={phone}
                     onChange={({target})=>setPhone(target.value)}
                   />
                 </div>
-                <div className="flex flex-col sm:flex-row justify-between gap-2">
-                  <span className="sm:w-1/2">Password: </span>
+                <div className={HostTheme.InfoChange.form}>
+                  <span className={HostTheme.InfoChange.text}>Password: </span>
                   <input
                     type="text"
-                    className="bg-mainA dark:bg-main w-full pl-4"
+                    className={InputTheme.mainAlt}
                     value={password}
                     onChange={({target})=>setPassword(target.value)}
                   />
                 </div>
-                <div className="flex flex-col sm:flex-row justify-between gap-2">
-                  <span className="sm:w-1/2">Re-type Password: </span>
+                <div className={HostTheme.InfoChange.form}>
+                  <span className={HostTheme.InfoChange.text}>Re-type Password: </span>
                   <input
                     type="text"
-                    className="bg-mainA dark:bg-main w-full pl-4"
+                    className={InputTheme.mainAlt}
                     value={passwordCheck}
                     onChange={({target})=>setPasswordCheck(target.value)}
                   />
                 </div>
-                <div className="flex gap-4">
-                    <input className="w-full bg-mainA dark:bg-main" type="file" />                  
+                <div className={InputTheme.fileMain}>
+                    <input className={InputTheme.file} type="file" />                  
                 </div>
             </form>
-            <div className="flex justify-between gap-4 pt-4">
-                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" onClick={()=>hidden()}>Cancel</button>
-                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" type="submit" form="inputUpdateForm">Confirm</button>
+            <div className={HostTheme.InfoChange.externalButtons}>
+                <button className={InputTheme.button.cancel} onClick={()=>hidden()}>Cancel</button>
+                <button className={InputTheme.button.submit} type="submit" form="inputUpdateForm">Confirm</button>
             </div>
         </div>
     )
@@ -133,11 +134,11 @@ const BlockList = ({info}) =>{
         } else{
             //For blocked display
             return(
-                <Link  className="bg-cardAltA dark:bg-cardAlt ml-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none" to={`/admin/User/${info.id}`} key={info.id}>
+                <Link className={HostTheme.BlockList} to={`/admin/User/${info.id}`} key={info.id}>
                     <div>Username:</div> <div>{info.username}</div>
-                    <div className="border border-cardA dark:border-card w-full col-span-2"/>
+                    <div className={HostTheme.line}/>
                     <div>Name:</div> <div>{info.name}</div>
-                    <div className="border border-cardA dark:border-card w-full col-span-2"/>
+                    <div className={HostTheme.line}/>
                     <div>Admin Status:</div> <div>{info.admin ? "True" : "False"}</div>
                 </Link>
             )
@@ -167,12 +168,12 @@ const FriendsList = ({info}) =>{
         if(status[0].status == 'friend'){
             //For Friends display info
             return(
-                <Link  className="bg-cardAltA dark:bg-cardAlt ml-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none" to={`/admin/User/${info.id}`} key={info.id}>
+                <Link  className={HostTheme.FriendList} to={`/admin/User/${info.id}`} key={info.id}>
                     <div className="col-span-2 text-center">Pending Acceptance</div>
                     <div>Username:</div> <div>{info.username}</div>
-                    <div className="border border-cardA dark:border-card w-full col-span-2"/>
+                    <div className={HostTheme.line}/>
                     <div>Name:</div> <div>{info.name}</div>
-                    <div className="border border-cardA dark:border-card w-full col-span-2"/>
+                    <div className={HostTheme.line}/>
                     <div>Admin Status:</div> <div>{info.admin ? "True" : "False"}</div>
                 </Link>
             )
@@ -185,11 +186,11 @@ const FriendsList = ({info}) =>{
     } else{
         //for confirmed friends display info
         return(
-            <Link  className="bg-cardAltA dark:bg-cardAlt ml-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none" to={`/admin/User/${info.id}`} key={info.id}>
+            <Link className={HostTheme.FriendList} to={`/admin/User/${info.id}`} key={info.id}>
                     <div>Username:</div> <div>{info.username}</div>
-                    <div className="border border-cardA dark:border-card w-full col-span-2"/>
+                    <div className={HostTheme.line}/>
                     <div>Name:</div> <div>{info.name}</div>
-                    <div className="border border-cardA dark:border-card w-full col-span-2"/>
+                    <div className={HostTheme.line}/>
                     <div>Admin Status:</div> <div>{info.admin ? "True" : "False"}</div>
             </Link>
         )
@@ -199,10 +200,9 @@ const FriendsList = ({info}) =>{
 export const AdminHost = ({userUpdate, user}) =>{
     const [users, setUser] = useState('')
     const [hidden, setHidden] = useState(false)
-    let singleUser
     const userCheck = async () =>{
-        const response = await userServices.getAll()
-        return setUser(response)
+        const response = await userServices.get()
+        return setUser([response])
     }
     
     useEffect(()=>{
@@ -221,44 +221,41 @@ export const AdminHost = ({userUpdate, user}) =>{
                 <div>Loading...</div>
             </div>
         )
-    }else{
-        singleUser= users.filter(x=>x.id == user)
     }
     return(
-        <div className="text-textA dark:text-text">
-            <div className="bg-backA dark:bg-back mt-4">
+        <div className={HostTheme.Host.main}>
+            <div className={HostTheme.Host.button.main}>
                 {hidden ? <InfoChange update={()=>specialUpdate()} hidden={()=>setHidden(false)}
-                 info={singleUser.map(x=>x.username)}/> : 
+                 info={users.map(x=>x.username)}/> : 
                  <button
-                  className="bg-cardAltA dark:bg-cardAlt m-4
-                  rounded-xl dark:rounded-none p-2"
+                  className={HostTheme.Host.button.button}
                   onClick={()=>setHidden(true)}>
                  Update Information</button>}
             </div>
-            <div className="bg-backA dark:bg-back mt-4">
-            {singleUser.map(x=>(
-                <div key={x.id} className="grid grid-cols-1 sm:grid-cols-2 gap-4 p-4">
-                    <div className="bg-cardA dark:bg-card py-4 grid grid-cols-2 gap-1 px-4 text-left rounded-2xl dark:rounded-none">
+            <div className={HostTheme.Host.mainCard}>
+            {users.map(x=>(
+                <div key={x.id} className={HostTheme.Host.mainCardAlt}>
+                    <div className={HostTheme.Host.infoCard}>
                         <ImagesViewer info={x.image}/>
-                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div className={HostTheme.lineAlt}/>
                         <div>Username:</div> <div>{x.username}</div>
-                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div className={HostTheme.lineAlt}/>
                         <div>Name:</div> <div>{x.name}</div>
-                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div className={HostTheme.lineAlt}/>
                         <div>Admin Status:</div> <div>{x.admin}</div>
-                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div className={HostTheme.lineAlt}/>
                         <div>Privacy Status:</div> <div>{x.private ? "True" : "False"} </div>
-                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div className={HostTheme.lineAlt}/>
                         <div>Email:</div> <div>{x.email}</div>
-                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div className={HostTheme.lineAlt}/>
                         <div>Phone Number:</div> <div>{x.phone}</div>
-                        <div className="border border-cardAltA dark:border-cardAlt w-full col-span-2"/>
+                        <div className={HostTheme.lineAlt}/>
                         <div>Total Messages:</div> <div>{x.messages.length}</div>
                     </div>
-                    <div className="bg-cardA dark:bg-card flex flex-col  rounded-2xl dark:rounded-none">
+                    <div className={HostTheme.Host.forumCard}>
                         <div className="my-4">Forums List: </div>
                         {x.forums.map(x=>(
-                        <Link className="bg-cardAltA dark:bg-cardAlt ml-4 my-4 pt-6 rounded-l-2xl dark:rounded-none" to={`/admin/Forum/${x.id}`} key={x.id}>
+                        <Link className={HostTheme.Host.forumCardLink} to={`/admin/Forum/${x.id}`} key={x.id}>
                             <div>{x.image}</div>
                             <div>{x.text}</div>
                             <div>{x.created}</div>
@@ -266,11 +263,11 @@ export const AdminHost = ({userUpdate, user}) =>{
                         </Link>
                     ))}
                     </div>  
-                    <div className="bg-cardA dark:bg-card flex flex-col py-4  rounded-2xl dark:rounded-none">
+                    <div className={HostTheme.Host.friendsList}>
                         <div className="mb-4">Friends List: </div>
                         {x.friends.map(x=><FriendsList key={x.id} info={x}/>)}
                     </div>
-                    <div className="bg-cardA dark:bg-card flex flex-col py-4 rounded-2xl dark:rounded-none">
+                    <div className={HostTheme.Host.blockList}>
                         <div className="mb-4">Block List: </div>
                         {x.friends.map(x=><BlockList key={x.id} info={x}/>)}
                     </div>

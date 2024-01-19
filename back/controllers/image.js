@@ -6,7 +6,7 @@ const { tokenExtractor, isAdmin } = require('../util/middleware')
 
 
 //  Adds new categoryItem with itemId,categoryId
-  router.post('/post/:id',tokenExtractor,isAdmin, async (req, res) => {
+  router.post('/post/:id',tokenExtractor, async (req, res) => {
     try {
         console.log(req.files)
         if (!req.files) {

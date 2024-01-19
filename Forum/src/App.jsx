@@ -39,12 +39,11 @@ import { UserUserSingle } from './components/User/userSingle'
 import { LoginMenu } from './components/loginMenu'
 import { AdminMenu } from './components/Admin/menu'
 import { UserMenu } from './components/User/menu'
-import { BlankMenu } from './components/blankMenu'
 
 const MenuLogic = ({admin,logoutFunction}) =>{
   if(admin == undefined){
     return(
-      <BlankMenu/>
+      <></>
     )
   } else if(admin == true){
     return <AdminMenu logoutFunction={()=>logoutFunction()}/>
@@ -81,20 +80,9 @@ function App() {
   const logoutFunction = () =>{setUserStatus("")}
 
   const Test = () =>(
-    <div className='w-full'>
-      <div>Test A</div>
-    </div>
+    <></>
   )
-  const TestB = () =>(
-    <div>
-      <div>Test B</div>
-    </div>
-  )
-  const TestC = () =>(
-    <div>
-      <div>Test C</div>
-    </div>
-  )
+
 
   const darkModeToggle = () =>{
     const check = document.getElementById('absolute').classList
@@ -129,7 +117,6 @@ function App() {
       <LoginMenu user={userStatus}/>
         <Routes>
     {/* Admin Routes */}
-          <Route path="/admin" element={userStatus.admin ? <AdminMain userUpdate={userUpdate}/>: <Navigate replace to="/" />} />
           <Route path="/admin/Forum" element={userStatus.admin ? <AdminForum userUpdate={userUpdate}/> : <Navigate replace to="/" />} />
           <Route path="/admin/Forum/:forumId" element={userStatus.admin ? <AdminForumPosts userUpdate={userUpdate}/> : <Navigate replace to="/" />} />   
           <Route path="/admin/Forum/Post/:postId" element={userStatus.admin ? <AdminPost userUpdate={userUpdate}/> : <Navigate replace to="/" />} />
@@ -139,7 +126,7 @@ function App() {
           <Route path="/admin/User" element={userStatus.admin ? <AdminUserList userUpdate={userUpdate}/> : <Navigate replace to="/" />} />
           <Route path="/admin/User/:userId" element={userStatus.admin ? <AdminUserSingle userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
     {/* User Routes */}
-          <Route path="/user" element={userStatus.admin == false ? <UserMain userUpdate={userUpdate}/> : <Navigate replace to="/" />} />
+          <Route path="/user" element={userStatus.admin == false ? <UserMain userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
           <Route path="/user/Forum" element={userStatus.admin == false ? <UserForum userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
           <Route path="/user/Forum/:forumId" element={userStatus.admin == false ? <UserForumPost userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
           <Route path="/user/Forum/Post/:postId" element={userStatus.admin == false ? <UserPost userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />

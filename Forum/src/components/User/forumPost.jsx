@@ -3,6 +3,8 @@ import { Link, useParams, useNavigate } from "react-router-dom"
 import postServices from '../../services/post'
 import userServices from '../../services/user'
 
+import {ForumPostTheme, InputTheme} from '../../theme'
+
 const IdToUserName = ({info}) =>{
     const [name,setName] = useState('')
     
@@ -13,30 +15,31 @@ const IdToUserName = ({info}) =>{
     nameCheck(info)
     return(
         <>
-            <div>{name}</div>
+            <span>{name}</span>
         </>
     )
 }
 
-const MainForumPost = ({forumList, change, user}) => {
+const MainForumPost = ({forumList,update, user}) => {
     const deletePost =async (info) =>{
         await postServices.deletePost({postId: info})
         update()
     }
     return(
-        <div>
-            <button onClick={()=>change()}>New Post</button>
+        <div className={ForumPostTheme.MainForumPost.main}>
             {forumList.map(x=>(
-                <div key={x.id}>
-                {user == x.userId ? <button onClick={()=>deletePost(x.id)}>Delete</button> : null}
-                    <Link to={`/user/Forum/Post/${x.id}`}>
-                        <div>Post Name: {x.text}</div>
-                        <div>Created on: {x.created}</div>
-                        <div>Number of Comments: {x.comments.length}</div>
+                <div key={x.id} className={ForumPostTheme.MainForumPost.cardMain}>
+                    <Link to={`/user/Forum/Post/${x.id}`} className={ForumPostTheme.MainForumPost.linkMain}>
+                        <div className="w-full">{x.text}</div>
+                        <div className={ForumPostTheme.MainForumPost.linkText}>
+                            <Link to={`/user/User/${x.userId}`}>
+                                <div>Created: <IdToUserName info={x.userId}/></div>
+                            </Link>
+                            <div>{x.created}</div>
+                            <div>Comments: {x.comments.length}</div>
+                        </div>
                     </Link>
-                    <Link to={`/user/User/${x.userId}`}>
-                        <div>Created By: </div><IdToUserName info={x.userId}/>
-                    </Link>
+                    {user == x.userId ? <button className={ForumPostTheme.MainForumPost.linkButton} onClick={()=>deletePost(x.id)}>X</button> : null}
                     <br/>
                 </div>
             ))}
@@ -56,19 +59,24 @@ const InputPost = ({id,change, update}) =>{
     }
 
     return(
-        <div>
-            <button onClick={()=>change()}>Cancel</button>
-            <form onSubmit={sendIt}>
-                <div>
-                    <span>Post Title: </span>
-                    <input
+        <div className={ForumPostTheme.InputPost.main}>
+            <form id="newUserPostForm" className={ForumPostTheme.InputPost.formMain} onSubmit={sendIt}>
+            <div className={ForumPostTheme.InputPost.form}>
+                    <span>Title: </span>
+                    <textarea
                     type="text"
+                    rows={4}
+                    cols={40}
+                    className={InputTheme.main}
                     value={text}
                     onChange={({target})=>setText(target.value)}
                     />
                 </div>
-                <button>Create New Post</button>
             </form>
+            <div className={ForumPostTheme.InputPost.externalButtons}>
+                <button className={InputTheme.button.cancel} onClick={()=>change()}>Cancel</button>
+                <button className={InputTheme.button.submit} type="submit" form="newUserPostForm">Create</button>
+            </div>
         </div>
     )
 }
@@ -88,6 +96,14 @@ export const UserForumPost = ({userUpdate, user}) =>{
         postsCheck()
     },[])
 
+    const NewPostButton = () =>{
+        return(
+            <div className={ForumPostTheme.AdminForumPosts.buttonMain}>
+                <button className={ForumPostTheme.AdminForumPosts.button} 
+                onClick={()=>setHidden(true)}>New Post</button>
+            </div>
+        )
+    }
 
 
     if(!posts){
@@ -102,7 +118,8 @@ export const UserForumPost = ({userUpdate, user}) =>{
     console.log(forumList)
     return(
         <div>
-            {hidden ? <InputPost change={()=>setHidden(false)} id={id} update={()=>postsCheck()}/> : <MainForumPost forumList={forumList} change={()=>setHidden(true)} user={user}/>}
+            {hidden ? <InputPost change={()=>setHidden(false)} id={id} update={()=>postsCheck()}/> : <NewPostButton/>}
+            <MainForumPost forumList={forumList} update={()=>postsCheck()} user={user}/>
         </div>
 
     )

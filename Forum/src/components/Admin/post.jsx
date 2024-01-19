@@ -6,12 +6,13 @@ import userServices from '../../services/user'
 import imageServices from '../../services/images'
 import {ImagesViewer, ImagesViewerAlt} from '../image'
 
+import {PostTheme, InputTheme} from '../../theme'
+
 const IdToUserName = ({info}) =>{
     const [name,setName] = useState('')
     
     const nameCheck =async (info) =>{
         const test = await userServices.getOne({id:info})
-        console.log(test.username)
         return setName(test.username)
     }
     nameCheck(info)
@@ -32,18 +33,15 @@ const SubComment = ({sub,comment, update}) =>{
 
     return(
         <div>
-            <button className="dark:text-black h-4 my-2 mr-2 p-1
-            text-[.7rem] bg-closeA dark:bg-text dark:rounded-none
-            leading-[.1rem]"  onClick={()=>setHidden( hidden ? false: true)}
-            >{!hidden ? "Comment" : "Cancel"}</button>
+            <button className={PostTheme.SubComment.buttonHidden}  onClick={()=>setHidden( hidden ? false: true)}>{!hidden ? "Comment" : "Cancel"}</button>
             {hidden ? <InputSubComment id={comment} update={()=>update()} hidden={()=>setHidden(false)}/> : null}
-            <div  className="ml-4 mb-4 flex flex-col gap-4">
+            <div  className={PostTheme.SubComment.main}>
             {sub.Sub.map(x=>(
-                <div key={x.id} className="bg-cardAltA dark:bg-cardAlt grid grid-cols-12 justify-between px-4 py-2 rounded-l-2xl">
-                    <ImagesViewerAlt info={x.image} change={"col-span-12 sm:col-span-2 h-24 bg-closeA dark:bg-card"}/>
-                    <div className="col-span-11 sm:col-span-9 w-full flex flex-col justify-between py-2">
+                <div key={x.id} className={PostTheme.SubComment.cardMain}>
+                    <ImagesViewerAlt info={x.image} change={PostTheme.SubComment.image}/>
+                    <div className={PostTheme.SubComment.cardSub}>
                         <div>{x.text}</div>
-                        <div className="flex gap-4 text-sm">
+                        <div className={PostTheme.SubComment.text}>
                             <div>{x.link}</div>
                             <div>{x.created}</div>
                             <Link to={`/admin/User/${x.userId}`}>
@@ -51,9 +49,7 @@ const SubComment = ({sub,comment, update}) =>{
                             </Link>
                         </div>
                     </div>
-                    <button className="dark:text-black h-4 mt-2 mr-2 p-1
-                    text-[.7rem] bg-closeA dark:bg-text dark:rounded-none
-                    leading-[.1rem]"  onClick={()=>deleteSubComment(x.id)}>X</button>
+                    <button className={PostTheme.SubComment.linkButton} onClick={()=>deleteSubComment(x.id)}>X</button>
 
                 </div>
             ))}
@@ -77,21 +73,21 @@ const MainPost = ({singlePost, change, update, id}) => {
     }
 
     const NewCommentButton = () =>(
-        <div className="bg-backA dark:bg-back">
-            <button className="bg-cardAltA dark:bg-cardAlt dark:rounded-none my-4 py-1" 
+        <div className={PostTheme.MainPost.hidden.buttonMain}>
+            <button className={PostTheme.MainPost.hidden.button}
             onClick={()=>setHidden(true)}>New Comment</button>
         </div>
     )
 
 
     return(
-        <div className="mt-4 text-textA dark:text-text">
+        <div className={PostTheme.MainPost.main}>
             {singlePost.map(x=>(
-                <div key={x.id} className="flex flex-col gap-4 ">
-                    <div className="bg-backA dark:bg-back p-6 ">
-                        <div className="bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-2xl dark:rounded-none  min-w-0 px-2">
+                <div key={x.id} className={PostTheme.MainPost.mapMain.main}>
+                    <div className={PostTheme.MainPost.mapMain.mainAlt}>
+                        <div className={PostTheme.MainPost.mapMain.card}>
                             <div>{x.text}</div>
-                            <div className="flex justify-between px-6">
+                            <div className={PostTheme.MainPost.mapMain.text}>
                                 <div>Created on: {x.created}</div>
                                 <Link to={`/admin/User/${x.userId}`}>User: <IdToUserName info={x.userId}/></Link>
                             </div>
@@ -100,15 +96,15 @@ const MainPost = ({singlePost, change, update, id}) => {
                     {hidden ? <InputComment change={()=>inputFunction()} id={id} update={()=>update()}
                      hidden={()=>setHidden(false)}/> : 
                      <NewCommentButton/>}
-                    <div className="bg-backA dark:bg-back p-6 flex flex-col gap-4 ">
+                    <div className={PostTheme.MainPost.comment.main}>
                         {x.comments.map(x=>(
-                            <div key={x.id} className="bg-cardA dark:bg-card rounded-2xl dark:rounded-none ">
+                            <div key={x.id} className={PostTheme.MainPost.comment.mainAlt}>
                                 <br/>
-                                <div className="grid grid-cols-12 pb-4 px-4  min-w-0 px-2">
-                                    <ImagesViewerAlt info={x.image} change={"col-span-12 sm:col-span-2 h-24 bg-closeA dark:bg-cardAlt"}/>
-                                    <div className="col-span-11 sm:col-span-9 flex flex-col justify-between w-full py-2">
+                                <div className={PostTheme.MainPost.comment.card}>
+                                    <ImagesViewerAlt info={x.image} change={PostTheme.MainPost.comment.image}/>
+                                    <div className={PostTheme.MainPost.comment.textMain}>
                                         <div>{x.text}</div>
-                                        <div className="flex justify-between w-full px-4 gap-2">
+                                        <div className={PostTheme.MainPost.comment.textAlt}>
                                             <div>{x.link}</div>
                                             <Link to={`/admin/User/${x.userId}`}>
                                                 <div>User:<IdToUserName info={x.userId}/></div>
@@ -116,9 +112,7 @@ const MainPost = ({singlePost, change, update, id}) => {
                                         </div>
                                     </div>
                                     <div>
-                                        <button className="dark:text-black h-4 mt-2 mr-2 p-1
-                                        text-[.7rem] bg-closeA dark:bg-text dark:rounded-none
-                                        leading-[.1rem]" 
+                                        <button className={PostTheme.MainPost.comment.linkButton}
                                          onClick={()=>commentDelete(x.id)}>X</button>
                                     </div>
                                 </div>
@@ -153,37 +147,35 @@ const InputComment = ({id, update, hidden}) =>{
     }
 
     return(
-        <div className="bg-backA dark:bg-back p-4 flex flex-col gap-4">
-            <form id="newCommentForm" onSubmit={sendIt} className="bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-xl dark:rounded-none">
-                <div className="flex flex-col sm:flex-row gap-4">
+        <div className={PostTheme.InputComment.main}>
+            <form id="newCommentForm" onSubmit={sendIt} className={PostTheme.InputComment.mainAlt}>
+                <div className={PostTheme.InputComment.inputAlt}>
                     <span>Comment: </span>
                     <textarea
                     type="text"
                     rows={4}
                     cols={30}
-                    className="w-full bg-mainA dark:bg-main"
+                    className={InputTheme.main}
                     value={text}
                     onChange={({target})=>setText(target.value)}
                     />
                 </div>
-                <div className="flex gap-4">
+                <div className={PostTheme.InputComment.input}>
                     <span>Link: </span>
                     <input
                     type="text"
                     value={link}
-                    className="w-full bg-mainA dark:bg-main"
+                    className={InputTheme.main}
                     onChange={({target})=>setLink(target.value)}
                     />
                 </div>
-                <div className="flex gap-4">
-                    <input className="w-full bg-mainA dark:bg-main" type="file" />                  
+                <div className={InputTheme.fileMain}>
+                    <input className={InputTheme.file} type="file" />                  
                 </div>
             </form>
-            <div className="flex gap-4">
-                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]"
-                 onClick={()=>hidden()}>Cancel</button>
-                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]"
-                 type="submit" form="newCommentForm">Create</button>
+            <div className={PostTheme.InputComment.externalButtons}>
+                <button className={InputTheme.button.cancel} onClick={()=>hidden()}>Cancel</button>
+                <button className={InputTheme.button.submit} type="submit" form="newCommentForm">Create</button>
             </div>
         </div>
     )
@@ -209,37 +201,35 @@ const InputSubComment = ({id, update, hidden}) =>{
     }
 
     return(
-        <div className="mx-4">
-            <form id="newSubCommentForm" onSubmit={sendIt} className="bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-xl dark:rounded-none">
-                <div className="flex flex-col sm:flex-row gap-4">
+        <div className={PostTheme.InputSubComment.main}>
+            <form id="newSubCommentForm" onSubmit={sendIt} className={PostTheme.InputSubComment.form}>
+                <div className={PostTheme.InputSubComment.inputAlt}>
                     <span>Comment: </span>
                     <textarea
                     type="text"
-                    className="w-full bg-mainA dark:bg-main"
+                    className={InputTheme.main}
                     rows={4}
                     cols={30}
                     value={text}
                     onChange={({target})=>setText(target.value)}
                     />
                 </div>
-                <div className="flex gap-4">
+                <div className={PostTheme.InputSubComment.input}>
                     <span>Link: </span>
                     <input
                     type="text"
-                    className="w-full bg-mainA dark:bg-main"
+                    className={InputTheme.main}
                     value={link}
                     onChange={({target})=>setLink(target.value)}
                     />
                 </div>
-                <div className="flex gap-4">
-                    <input className="w-full bg-mainA dark:bg-main" type="file" />                  
+                <div className={InputTheme.fileMain}>
+                    <input className={InputTheme.file} type="file" />                  
                 </div>
             </form>
-            <div className="flex gap-2 py-4">
-                    <button className="bg-cardAltA px-0 dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" 
-                    onClick={()=>hidden()}>Cancel</button>
-                    <button className="bg-cardAltA px-0 dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]"
-                     type="submit" form="newSubCommentForm">Create</button>
+            <div className={PostTheme.InputSubComment.externalButtons}>
+                    <button className={InputTheme.button.cancelAlt} onClick={()=>hidden()}>Cancel</button>
+                    <button className={InputTheme.button.submitAlt} type="submit" form="newSubCommentForm">Create</button>
             </div>
         </div>
     )

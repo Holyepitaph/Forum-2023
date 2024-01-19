@@ -1,5 +1,6 @@
 import { useState } from "react"
 import userServices from '../services/user'
+import { SignUpTheme, InputTheme } from "../theme"
 
 export const SignUp = () =>{
     const [username, setUsername] = useState('')
@@ -45,48 +46,54 @@ export const SignUp = () =>{
     }
 
     return(
-        <div>
-            <div>Create New User</div>
-            <div>{error}</div>
-            <form onSubmit={sendIt}>
-                <div>
-                  <span >Username:</span>
+        <div className={SignUpTheme.main}>
+          <div className={SignUpTheme.card}>
+            <div className="text-2xl font-semibold">Create New User</div>
+            {error ? <div>{error}</div> : null}
+            <form className={SignUpTheme.card} onSubmit={sendIt}>
+                <div className={InputTheme.alt}>
+                  <span className={SignUpTheme.text} >Username:</span>
                   <input 
                     type='text'
                     value={username}
+                    className={InputTheme.main}
                     required
                     onChange={({target})=>setUsername(target.value)}
                   />
                 </div>
-                <div>
-                  <span >Name:</span>
+                <div className={InputTheme.alt}>
+                  <span  className={SignUpTheme.text} >Name:</span>
                   <input 
                     type='text'
                     value={name}
+                    className={InputTheme.main}
                     required
                     onChange={({target})=>setName(target.value)}
                   />
                 </div>
-                <div>
-                  <span >Password:</span>
+                <div className={InputTheme.alt}>
+                  <span  className={SignUpTheme.text} >Password:</span>
                   <input 
                     type='password'
                     value={password}
+                    className={InputTheme.mainAlt}
                     required
                     onChange={({target})=>setPassword(target.value)}
                   />
                 </div>
-                <div>
-                  <span >Re-enter Password:</span>
+                <div className={InputTheme.alt}>
+                  <span  className={SignUpTheme.text} >Re-enter Password:</span>
                   <input 
                     type='password'
                     value={repassword}
+                    className={InputTheme.main}
                     required
                     onChange={({target})=>setRepassword(target.value)}
                   />
                 </div>
-                <button>Create User</button>
+                <button className={SignUpTheme.button}>Create User</button>
             </form>
+          </div>
         </div>
     )
 }

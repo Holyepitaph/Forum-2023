@@ -1,0 +1,197 @@
+ export const ForumTheme = {
+    MainForum:{
+        main:"w-full text-textA dark:text-text bg-backA dark:bg-back mt-4 p-4",
+        cardMain:"bg-cardA dark:bg-card my-4 grid grid-cols-12 justify-center rounded-xl dark:rounded-none",
+        image:"col-span-12 h-24 sm:col-span-2 bg-closeA dark:bg-text ml-2 my-2 border border-white",
+        linkMain:"w-full h-full col-span-11 sm:col-span-9 mt-2 flex flex-col justify-between",
+        linkButton:"dark:text-black h-4 w-4 mt-2 mr-2 p-1 text-[.7rem] bg-closeA dark:bg-text dark:rounded-none leading-[.1rem]"
+    },
+    InputForum:{
+        main:"w-full bg-backA text-textA dark:text-text dark:bg-back py-4 px-4 flex flex-col gap-4",
+        formMain:"bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-2xl dark:rounded-none",
+        form:"flex flex-col sm:flex-row justify-between gap-2",
+        externalButtons:"flex justify-between gap-4"
+    },
+    AdminForum:{
+        buttonMain:"w-full bg-backA dark:bg-back p-2",
+        button:"bg-cardAltA dark:bg-cardAlt px-4 py-2 dark:rounded-none text-textA dark:text-text" 
+    }
+ }
+
+ export const ForumPostTheme = {
+    MainForumPost:{
+        main:"bg-backA dark:bg-back mt-4 p-4 flex flex-col gap-4",
+        cardMain:"flex bg-cardA dark:bg-card justify-end py-4 gap-2 rounded-xl dark:rounded-none",
+        linkMain:"w-full flex flex-col text-textA dark:text-text gap-2 min-w-0 px-2",
+        linkText:"flex gap-2 text-sm justify-between px-4",
+        linkButton:"dark:text-black h-4 mt-2 mr-2 p-1 text-[.7rem] bg-closeA dark:bg-text dark:rounded-none leading-[.1rem]"
+    },
+    InputPost:{
+        main:"mt-4 bg-backA dark:bg-back p-2 text-textA dark:text-text",
+        formMain:"bg-cardAltA dark:bg-cardAlt p-4 mx-2 rounded-2xl dark:rounded-none",
+        form:"flex flex-col sm:flex-row gap-2",
+        externalButtons:"flex justify-between px-2 py-4 gap-4"
+    },
+    AdminForumPosts:{
+        buttonMain:"w-full bg-backA dark:bg-back p-2 mt-4",
+        button:"bg-cardAltA dark:bg-cardAlt px-4 py-2 dark:rounded-none text-textA dark:text-text" 
+    }
+ }
+
+ export const PostTheme = {
+    SubComment:{
+        buttonHidden:"dark:text-black h-4 my-2 mr-2 p-1 text-[.7rem] bg-closeA dark:bg-text dark:rounded-none leading-[.1rem]",
+        main:"mx-4 mb-4 flex flex-col gap-4",
+        cardMain:"bg-cardAltA dark:bg-cardAlt grid grid-cols-12 justify-between px-4 py-2 rounded-2xl",
+        image:"col-span-12 sm:col-span-2 h-24 bg-closeA dark:bg-card",
+        cardSub:"col-span-11 sm:col-span-9 w-full flex flex-col justify-between py-2",
+        text:"flex gap-4 text-sm",
+        linkButton:"dark:text-black h-4 mt-2 mr-2 p-1 text-[.7rem] bg-closeA dark:bg-text dark:rounded-none leading-[.1rem]" 
+    },
+    MainPost:{
+        hidden:{
+            buttonMain:"bg-backA dark:bg-back",
+            button:"bg-cardAltA dark:bg-cardAlt dark:rounded-none my-4 py-1" 
+        },
+        main:"mt-4 text-textA dark:text-text",
+        mapMain:{
+            main:"flex flex-col gap-4",
+            mainAlt:"bg-backA dark:bg-back p-6 ",
+            card:"bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-2xl dark:rounded-none  min-w-0 px-2",
+            text:"flex justify-between px-6"
+        },
+        comment:{
+            main:"bg-backA dark:bg-back p-6 flex flex-col gap-4 ",
+            mainAlt:"bg-cardA dark:bg-card rounded-2xl dark:rounded-none ",
+            card:"grid grid-cols-12 pb-4 px-4  min-w-0 px-2",
+            image:"col-span-12 sm:col-span-2 h-24 bg-closeA dark:bg-cardAlt",
+            textMain:"col-span-11 sm:col-span-9 flex flex-col justify-between w-full py-2",
+            textAlt:"flex justify-between w-full px-4 gap-2",
+            linkButton:"dark:text-black h-4 mt-2 mr-2 p-1 text-[.7rem] bg-closeA dark:bg-text dark:rounded-none leading-[.1rem]"
+        }
+    },
+    InputComment:{
+        main:"bg-backA dark:bg-back p-4 flex flex-col gap-4",
+        mainAlt:"bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-xl dark:rounded-none",
+        inputAlt:"flex flex-col sm:flex-row gap-4",
+        input:"flex gap-4",
+        externalButtons:"flex gap-4"
+    },
+    InputSubComment:{
+        main:"mx-4",
+        form:"bg-cardAltA dark:bg-cardAlt p-4 flex flex-col gap-4 rounded-xl dark:rounded-none",
+        inputAlt:"flex flex-col sm:flex-row gap-4",
+        input:"flex gap-4",
+        externalButtons:"flex gap-2 py-4"
+    }
+ }
+
+ export const UserListTheme = {
+    main:"bg-backA dark:bg-back mt-4 grid grid-cols-1 sm:grid-cols-2 p-4 gap-4 text-textA dark:text-text",
+    link:"bg-cardA dark:bg-card grid-cols-3 grid p-2 grid-1 text-left gap-2 sm:text-sm",
+    line: "col-span-3 border border-cardAltA dark:border-cardAlt",
+    text:"text-sm leading-loose",
+    textAlt:"sm:leading-loose"
+ }
+
+ export const SingleUserListTheme = {
+    InputMessage:{
+        main:"bg-backA dark:bg-back mt-4 grid grid-cols-1 sm:grid-cols-2 p-4 gap-4 text-textA dark:text-text",
+        formMain:"bg-cardAltA dark:bg-cardAlt p-4 mx-2 rounded-2xl dark:rounded-none",
+        form:"flex flex-col sm:flex-row gap-2",
+        button:"bg-cardA dark:bg-card px-4 py-2 mt-4 dark:rounded-none text-textA dark:text-text w-1/2 mx-auto" 
+
+    },
+    RelationshipLogic:{
+        main:"bg-backA dark:bg-back mt-4 p-4 gap-4 text-textA dark:text-text flex",
+        button:"bg-cardAltA dark:bg-cardAlt px-4 py-2 dark:rounded-none text-textA dark:text-text w-1/2 mx-auto" 
+    },
+    AdminUserSingle:{
+        main:"bg-backA dark:bg-back mt-4 grid grid-cols-1 sm:grid-cols-2 p-4 gap-4 text-textA dark:text-text",
+        line: "col-span-3 border border-cardAltA dark:border-cardAlt",
+        card:"bg-cardA dark:bg-card py-4 grid grid-cols-2 gap-1 px-4 text-left rounded-2xl dark:rounded-none"
+    }
+ }
+
+ export const MessageSingleTheme = {
+    InputMessage:{
+        main:"bg-backA dark:bg-back mt-4 text-textA dark:text-text",
+        form:"flex gap-4 p-4",
+        input:"w-full bg-mainA dark:bg-text pl-4 dark:text-black",
+        button:"bg-cardA dark:bg-card dark:rounded-none py-[.05rem]"
+    },
+    MessageSingle:{
+        main:"bg-backA dark:bg-back mt-4 p-4 flex flex-col gap-4 text-textA dark:text-text",
+        title:"bg-cardA dark:bg-card mx-2 p-2",
+        self:{
+            main:"grid grid-cols-4 mx-2",
+            space:"sm:col-span-2" ,
+            card:"col-span-3 sm:col-span-2 bg-cardA dark:bg-card  rounded-tr-[2rem] rounded-bl-[2rem]" ,
+            text:"bg-mainA dark:bg-text text-black rounded-tr-[2rem] rounded-bl-[.5rem] p-1 m-2" ,
+            info:"flex gap-4 justify-between pl-6 pr-2 text-[.7rem]" 
+        },
+        other:{
+            main:"grid grid-cols-4 mx-2" ,
+            card:"col-span-3 sm:col-span-2 bg-cardA dark:bg-card  rounded-tl-[2rem] rounded-br-[2rem]" ,
+            text:"bg-mainA dark:bg-text text-black rounded-tl-[2rem] rounded-br-[.5rem] p-1 m-2" ,
+            info:"flex gap-4 justify-between pl-2 pr-6 text-[.6rem]"
+        }
+    }
+ }
+
+//For Host on Admin and Main for User
+ export const HostTheme = {
+    InfoChange:{
+        main:"bg-cardAltA dark:bg-cardAlt flex flex-col gap-4 py-4 px-4",
+        form:"flex flex-col sm:flex-row justify-between gap-2",
+        text:"sm:w-1/2",
+        externalButtons:"flex justify-between gap-4 pt-4"
+    },
+    line:"border border-cardA dark:border-card w-full col-span-2",
+    lineAlt:"border border-cardAltA dark:border-cardAlt w-full col-span-2",
+    BlockList:"bg-cardAltA dark:bg-cardAlt mx-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-2xl dark:rounded-none",
+    FriendList:"bg-cardAltA dark:bg-cardAlt ml-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none",
+    Host:{
+        main:"text-textA dark:text-text",
+        button:{
+            main:"bg-backA dark:bg-back mt-4",
+            button:"bg-cardAltA dark:bg-cardAlt m-4 rounded-xl dark:rounded-none p-2"
+        },
+        mainCard:"bg-backA dark:bg-back mt-4",
+        mainCardAlt:"grid grid-cols-1 sm:grid-cols-2 gap-4 p-4",
+        infoCard:"bg-cardA dark:bg-card py-4 grid grid-cols-2 gap-1 px-4 text-left rounded-2xl dark:rounded-none",
+        forumCard:"bg-cardA dark:bg-card flex flex-col  rounded-2xl dark:rounded-none",
+        forumCardLink:"bg-cardAltA dark:bg-cardAlt mx-4 my-4 pt-6 rounded-l-2xl dark:rounded-none",
+        friendsList:"bg-cardA dark:bg-card flex flex-col py-4  rounded-2xl dark:rounded-none",
+        blockList:"bg-cardA dark:bg-card flex flex-col py-4 rounded-2xl dark:rounded-none"
+    }
+ }
+
+ export const InputTheme = {
+    main:"bg-mainA dark:bg-main w-full",
+    mainAlt:"bg-mainA dark:bg-main w-full pl-4",
+    alt:"flex flex-col sm:flex-row gap-2 px-4",
+    fileMain:"flex justify-between",
+    file:"bg-mainA dark:bg-main w-full",
+    button:{
+        cancel:"bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]",
+        cancelAlt:"bg-cardAltA px-0 dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]",
+        submit:"bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]",
+        submitAlt:"bg-cardAltA px-0 dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]"
+    }
+ }
+
+ export const MenuTheme = {
+    main:"w-full bg-backA dark:bg-back text-textA dark:text-text p-2 px-4 flex justify-between gap-2",
+    link:"bg-cardAltA dark:bg-cardAlt p-1 rounded-md dark:rounded-none",
+    linkAlt:"bg-cardAltA dark:bg-cardAlt p-1 text-[1.5vw]  rounded-3xl dark:rounded-none",
+    linkAltB:"bg-cardAltA dark:bg-cardAlt p-1 dark:rounded-none rounded-md dark:rounded-none"
+ }
+
+ export const SignUpTheme = {
+    main:'w-full bg-backA dark:bg-back p-4 text-textA dark:text-text',
+    card:'bg-cardA dark:bg-card flex flex-col justify-between gap-4 p-2 whitespace-nowrap',
+    button:'bg-cardAltA dark:bg-cardAlt',
+    text:'w-1/3 text-left'
+
+ }

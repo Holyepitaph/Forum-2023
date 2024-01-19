@@ -2,6 +2,8 @@ import { useEffect, useState } from "react"
 import { Link, useParams, useNavigate } from "react-router-dom"
 import userServices from '../../services/user'
 
+import {UserListTheme} from '../../theme'
+
 
 export const AdminUserList = ({userUpdate}) =>{
 const [users, setUser] = useState('')
@@ -24,28 +26,26 @@ const [users, setUser] = useState('')
     }
 
     return(
-        <div className="bg-backA dark:bg-back mt-4 grid grid-cols-1 sm:grid-cols-2 p-4 gap-4 text-textA dark:text-text">
+        <div className={UserListTheme.main}>
             {users.map(x=>(
-                <Link to={`/admin/User/${x.id}`} className="bg-cardA dark:bg-card 
-                grid-cols-3 grid p-2 grid-1
-                text-left gap-2 sm:text-sm" 
+                <Link to={`/admin/User/${x.id}`} className={UserListTheme.link}
                 key={x.id}>
-                    <div className="text-sm leading-loose">Username:</div><div className="sm:leading-loose">{x.username}</div>
-                    <div className="col-span-3 border border-cardAltA dark:border-cardAlt"/>
+                    <div className={UserListTheme.text}>Username:</div><div className={UserListTheme.textAlt}>{x.username}</div>
+                    <div className={UserListTheme.line}/>
                     <div>Name:</div><div>{x.name}</div>
-                    <div className="col-span-3 border border-cardAltA dark:border-cardAlt"/>
+                    <div className={UserListTheme.line}/>
                     <div>Admin:</div><div>{x.admin}</div>
-                    <div className="col-span-3 border border-cardAltA dark:border-cardAlt"/>
+                    <div className={UserListTheme.line}/>
                     <div>Email:</div><div>{x.email}</div>
-                    <div className="col-span-3 border border-cardAltA dark:border-cardAlt"/>
+                    <div className={UserListTheme.line}/>
                     <div>Number:</div><div>{x.phone}</div>
-                    <div className="col-span-3 border border-cardAltA dark:border-cardAlt"/>
+                    <div className={UserListTheme.line}/>
                     <div>Image:</div><div>{x.image}</div>
-                    <div className="col-span-3 border border-cardAltA dark:border-cardAlt"/>
-                    <div className="text-sm leading-loose">Messages:</div><div className="sm:leading-loose">{x.messages.length}</div>
-                    <div className="col-span-3 border border-cardAltA dark:border-cardAlt"/>
+                    <div className={UserListTheme.line}/>
+                    <div className={UserListTheme.text}>Messages:</div><div className={UserListTheme.textAlt}>{x.messages.length}</div>
+                    <div className={UserListTheme.line}/>
                     <div>Friends:</div><div>{x.friends.length}</div>
-                    <div className="col-span-3 border border-cardAltA dark:border-cardAlt"/>
+                    <div className={UserListTheme.line}/>
                     <div>Forums:</div><div>{x.forums.length}</div>
                 </Link>
             ))}

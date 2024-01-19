@@ -3,6 +3,8 @@ import { Link, useParams, useNavigate } from "react-router-dom"
 import postServices from '../../services/post'
 import userServices from '../../services/user'
 
+import {ForumPostTheme, InputTheme} from '../../theme'
+
 const IdToUserName = ({info}) =>{
     const [name,setName] = useState('')
     
@@ -26,12 +28,12 @@ const MainForumPost = ({forumList, update}) => {
     }
 
     return(
-            <div className="bg-backA dark:bg-back mt-4 p-4 flex flex-col gap-4">
+            <div className={ForumPostTheme.MainForumPost.main}>
             {forumList.map(x=>(
-                <div key={x.id} className="flex bg-cardA dark:bg-card justify-end py-4 gap-2 rounded-xl dark:rounded-none">
-                    <Link to={`/admin/Forum/Post/${x.id}`} className="w-full flex flex-col text-textA dark:text-text gap-2 min-w-0 px-2">
+                <div key={x.id} className={ForumPostTheme.MainForumPost.cardMain}>
+                    <Link to={`/admin/Forum/Post/${x.id}`} className={ForumPostTheme.MainForumPost.linkMain}>
                         <div className="w-full">{x.text}</div>
-                        <div className="flex gap-2 text-sm justify-between px-4">
+                        <div className={ForumPostTheme.MainForumPost.linkText}>
                             <Link to={`/admin/User/${x.userId}`}>
                                 <div>Created: <IdToUserName info={x.userId}/></div>
                             </Link>
@@ -40,10 +42,7 @@ const MainForumPost = ({forumList, update}) => {
                         </div>
                     </Link>
                     <button onClick={()=>deletePost(x.id)}
-                    className="dark:text-black h-4 mt-2 mr-2 p-1
-                    text-[.7rem] bg-closeA dark:bg-text dark:rounded-none
-                    leading-[.1rem]"
-                    >X</button>
+                    className={ForumPostTheme.MainForumPost.linkButton}>X</button>
                     <br/>
                 </div>
             ))}
@@ -63,23 +62,23 @@ const InputPost = ({id,change, update}) =>{
     }
 
     return(
-        <div className="mt-4 bg-backA dark:bg-back p-2 text-textA dark:text-text">
-            <form id="newPostForm" className="bg-cardAltA dark:bg-cardAlt p-4 mx-2 rounded-2xl dark:rounded-none" onSubmit={sendIt}>
-                <div className="flex flex-col sm:flex-row gap-2">
+        <div className={ForumPostTheme.InputPost.main}>
+            <form id="newPostForm" className={ForumPostTheme.InputPost.formMain} onSubmit={sendIt}>
+                <div className={ForumPostTheme.InputPost.form}>
                     <span>Title: </span>
                     <textarea
                     type="text"
                     rows={4}
                     cols={40}
-                    className="w-full bg-mainA dark:bg-main"
+                    className={InputTheme.main}
                     value={text}
                     onChange={({target})=>setText(target.value)}
                     />
                 </div>
             </form>
-            <div className="flex justify-between px-2 py-4 gap-4">
-                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" onClick={()=>change()}>Cancel</button>
-                <button className="bg-cardAltA dark:bg-cardAlt w-full dark:rounded-none h-8 leading-[.5rem]" type="submit" form="newPostForm">Create</button>
+            <div className={ForumPostTheme.InputPost.externalButtons}>
+                <button className={InputTheme.button.cancel} onClick={()=>change()}>Cancel</button>
+                <button className={InputTheme.button.submit} type="submit" form="newPostForm">Create</button>
             </div>
         </div>
     )
@@ -102,8 +101,8 @@ export const AdminForumPosts = ({userUpdate}) =>{
 
     const NewPostButton = () =>{
         return(
-            <div className="w-full bg-backA dark:bg-back p-2 mt-4">
-                <button className="bg-cardAltA dark:bg-cardAlt px-4 py-2 dark:rounded-none text-textA dark:text-text" 
+            <div className={ForumPostTheme.AdminForumPosts.buttonMain}>
+                <button className={ForumPostTheme.AdminForumPosts.button} 
                 onClick={()=>setHidden(true)}>New Post</button>
             </div>
         )

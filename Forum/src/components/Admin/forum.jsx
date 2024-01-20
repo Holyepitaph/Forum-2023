@@ -19,9 +19,12 @@ const MainForum = ({forumList, update}) => {
                 <ImagesViewer info={x.image} change={ForumTheme.MainForum.image}/>
                 <Link to={`/admin/Forum/${x.id}`} className={ForumTheme.MainForum.linkMain}>
                     <div>{x.text}</div>
-                    <div>Created: {x.created}</div>
-                    <div> Total Posts: {x.posts.length}</div>
-                    <br/>
+                    <div className={ForumTheme.MainForum.linkAlt}>
+                        <div>                        
+                            <span className={ForumTheme.MainForum.hidden}>Created: </span><span>{x.created}</span> 
+                        </div>
+                        <div> Total Posts: {x.posts.length}</div>
+                    </div>
                 </Link>
                 <button 
                     className={ForumTheme.MainForum.linkButton} onClick={()=>deleteForum(x.id)}>X</button>

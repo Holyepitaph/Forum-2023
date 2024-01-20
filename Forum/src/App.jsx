@@ -108,7 +108,7 @@ function App() {
     // }
 
   return (
-    <div className='w-full'>
+    <div className='w-full sm:px-4'>
       {/* <TempMenu/> */}
       <Router className="w-full">
       
@@ -138,7 +138,7 @@ function App() {
           <Route path="/login" element={ !userStatus ? <LoginPage userUpdate={userUpdate}/> : <Navigate replace to="/"/>} />
           <Route path="/signUp" element={<SignUp/>} />
         </Routes>
-        <button onClick={()=>darkModeToggle()}>Toggle Dark/Light Mode</button>
+        <button className='text-blue-500 sm:text-red-500 md:text-yellow-500' onClick={()=>darkModeToggle()}>Toggle Dark/Light Mode</button>
       </Router>
     </div>
   )

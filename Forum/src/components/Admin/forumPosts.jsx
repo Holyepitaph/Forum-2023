@@ -35,10 +35,12 @@ const MainForumPost = ({forumList, update}) => {
                         <div className="w-full">{x.text}</div>
                         <div className={ForumPostTheme.MainForumPost.linkText}>
                             <Link to={`/admin/User/${x.userId}`}>
-                                <div>Created: <IdToUserName info={x.userId}/></div>
+                                <span className={ForumPostTheme.MainForumPost.hidden}>Created: </span><span><IdToUserName info={x.userId}/></span>
                             </Link>
                             <div>{x.created}</div>
-                            <div>Comments: {x.comments.length}</div>
+                            <div>
+                                <span className={ForumPostTheme.MainForumPost.hidden}>Comments: </span><span>{x.comments.length}</span>
+                            </div>
                         </div>
                     </Link>
                     <button onClick={()=>deletePost(x.id)}

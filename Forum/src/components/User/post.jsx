@@ -47,9 +47,9 @@ const SubComment = ({sub,comment, update, user}) =>{
                         <div>{x.text}</div>
                         <div className={PostTheme.SubComment.text}>
                             <div>{x.link}</div>
-                            <div>{x.created}</div>
-                            <Link to={`/admin/User/${x.userId}`}>
-                                <div>User: <IdToUserName info={x.userId}/></div>
+                            <div className={PostTheme.SubComment.textAlt}>{x.created}</div>
+                            <Link to={`/user/User/${x.userId}`}>
+                                <span className={PostTheme.SubComment.textAltA}>User: </span><span><IdToUserName info={x.userId}/></span>
                             </Link>
                         </div>
                     </div>
@@ -87,11 +87,15 @@ const MainPost = ({singlePost, change, update, id, user}) => {
             {singlePost.map(x=>(
                 <div key={x.id} className={PostTheme.MainPost.mapMain.main}>
                     <div className={PostTheme.MainPost.mapMain.mainAlt}>
-                        <div className={PostTheme.MainPost.mapMain.card}>
+                    <div className={PostTheme.MainPost.mapMain.card}>
                             <div>{x.text}</div>
                             <div className={PostTheme.MainPost.mapMain.text}>
-                                <div>Created on: {x.created}</div>
-                                <Link to={`/admin/User/${x.userId}`}>User: <IdToUserName info={x.userId}/></Link>
+                                <div>
+                                    <span className={PostTheme.MainPost.mapMain.textAlt}>Created on: </span><span>{x.created}</span>
+                                </div>
+                                <Link to={`/user/User/${x.userId}`}>
+                                    <span className={PostTheme.MainPost.mapMain.textAlt}>User: </span><span><IdToUserName info={x.userId}/></span>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -108,8 +112,11 @@ const MainPost = ({singlePost, change, update, id, user}) => {
                                         <div>{x.text}</div>
                                         <div className={PostTheme.MainPost.comment.textAlt}>
                                             <div>{x.link}</div>
-                                            <Link to={`/admin/User/${x.userId}`}>
-                                                <div>User:<IdToUserName info={x.userId}/></div>
+                                            <div className={PostTheme.MainPost.comment.textAltA}>{x.created}</div>
+                                            <Link to={`/user/User/${x.userId}`}>
+                                                <div>
+                                                    <span className={PostTheme.MainPost.comment.textAltB}>User: </span><span><IdToUserName info={x.userId}/></span>
+                                                </div>
                                             </Link>
                                         </div>
                                     </div>

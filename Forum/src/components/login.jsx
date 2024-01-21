@@ -2,8 +2,8 @@ import { useState, useEffect } from "react"
 import loginServices from '../services/login'
 
 export const LoginPage = ({userUpdate}) =>{
-    const [username, setUsername] = useState('admin')
-    const [password,setPassword] = useState('secret')
+    const [username, setUsername] = useState('')
+    const [password,setPassword] = useState('')
 
     useEffect(()=>{
       userUpdate()

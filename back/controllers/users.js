@@ -23,7 +23,7 @@ router.get('/all',tokenExtractor, async (req, res) =>{
   }
 })
 
-router.post('/one',tokenExtractor, async (req, res) =>{
+router.post('/one', async (req, res) =>{
   const userCheck = await User.findByPk(req.body.id,{attributes:{
     exclude:["admin",'created','email','id','image','name','passwordHash','phone','private']}})  
   res.json(userCheck)

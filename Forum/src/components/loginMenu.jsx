@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom"
 import loginServices from "../services/login"
+import { LoginMenuTheme } from "../theme"
 
 export const LoginMenu = ({user}) =>{
   if(user){
@@ -9,9 +10,10 @@ export const LoginMenu = ({user}) =>{
   }else{
     return(
       //text changes only for differentiating dark mode from light and viewport size
-      <div className="flex gap-4 justify-center">
-          <Link className="bg-backA dark:bg-back p-2" to='/login'> Login </Link>
-          <Link className="bg-backA dark:bg-back p-2" to='/signUp'> SignUp </Link>
+      <div className={LoginMenuTheme.main}>
+          <Link className={LoginMenuTheme.link} to='/login'>Login</Link>
+          <Link className={LoginMenuTheme.link} to='/forum'>Forum</Link>
+          <Link className={LoginMenuTheme.link} to='/signUp'>SignUp</Link>
       </div>
     )
   }

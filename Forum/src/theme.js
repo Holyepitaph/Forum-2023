@@ -201,5 +201,9 @@
     card:'bg-cardA dark:bg-card flex flex-col justify-between gap-4 p-2 whitespace-nowrap',
     button:'bg-cardAltA dark:bg-cardAlt',
     text:'w-1/3 text-left'
+ }
 
+ export const LoginMenuTheme ={
+    main:"flex gap-4 justify-between p-4 bg-backA dark:bg-back text-textA dark:text-text",
+    link:"bg-backA dark:bg-back p-2 bg-cardA dark:bg-card"
  }

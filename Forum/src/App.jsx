@@ -39,6 +39,9 @@ import { UserUserSingle } from './components/User/userSingle'
 import { LoginMenu } from './components/loginMenu'
 import { AdminMenu } from './components/Admin/menu'
 import { UserMenu } from './components/User/menu'
+import { NonUserForum } from './components/NonUser/Forum'
+import { NonUserForumPosts } from './components/NonUser/forumPost'
+import { NonUserPost } from './components/NonUser/post'
 
 const MenuLogic = ({admin,logoutFunction}) =>{
   if(admin == undefined){
@@ -135,8 +138,12 @@ function App() {
           <Route path="/user/User" element={userStatus.admin == false ? <UserUserList userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
           <Route path="/user/User/:userId" element={userStatus.admin == false ? <UserUserSingle userUpdate={userUpdate}/> : <Navigate replace to="/" />} />
           <Route path="/" element={ <Test/> } />
+    {/* Non-User Routes */}
           <Route path="/login" element={ !userStatus ? <LoginPage userUpdate={userUpdate}/> : <Navigate replace to="/"/>} />
           <Route path="/signUp" element={<SignUp/>} />
+          <Route path="/forum" element={ !userStatus ? <NonUserForum userUpdate={userUpdate}/> : <Navigate replace to="/"/>} />
+          <Route path="/forum/:forumId" element={ !userStatus ? <NonUserForumPosts userUpdate={userUpdate}/> : <Navigate replace to="/"/>} />
+          <Route path="/forum/Post/:postId" element={ !userStatus ? <NonUserPost userUpdate={userUpdate}/> : <Navigate replace to="/"/>} />
         </Routes>
         <button className='text-blue-500 sm:text-red-500 md:text-yellow-500' onClick={()=>darkModeToggle()}>Toggle Dark/Light Mode</button>
       </Router>

@@ -23,11 +23,15 @@ const InfoChange = ({hidden,update,info}) =>{
         }
         e.preventDefault()
         if(password == passwordCheck || !password){
-            const regEx = /.jpeg|.jpg|.gif|.png|.webp/
-            const regMatch = e.target[4].files[0].name.match(regEx)
-            const imageTest = await imageServices.getAll()
-            const id = Math.max(...imageTest.map(x=>x.id))
-            const prep = id + regMatch[0]
+            let prep
+            if(e.target[4].files[0]){
+                const regEx = /.jpeg|.jpg|.gif|.png|.webp/
+                const regMatch = e.target[4].files[0].name.match(regEx)
+                const imageTest = await imageServices.getAll()
+                const id = Math.max(...imageTest.map(x=>x.id))
+                prep = id + regMatch[0]
+                await imageServices.createOrder({file: e.target[1].files , id: id})
+            }
             const newUser = {
                 email: email ? email : null,
                 password: password ? password : null,
@@ -35,7 +39,6 @@ const InfoChange = ({hidden,update,info}) =>{
                 image: prep ? prep : null,
                 username: info
             }
-            console.log(newUser)
             await userServices.updateUser(newUser)
             await imageServices.createOrder({file: e.target[4].files, id: id})
             setError(`Information Successfully Updated`)

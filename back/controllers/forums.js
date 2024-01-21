@@ -25,7 +25,7 @@ router.post('/',tokenExtractor, async (req, res) =>{
         const user = await User.findByPk(req.decodedToken.id)
         const newForum = {
             text: req.body.text,
-            image: req.body.image
+            image: req.body.image ? req.body.image : null
         }
         const sentForum = await Forum.create({...newForum, userId: user.id})
         res.json(sentForum)

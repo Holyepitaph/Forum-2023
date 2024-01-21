@@ -39,13 +39,17 @@ const InputForum = ({change,update}) =>{
 
     const sendIt = async (e) =>{
         e.preventDefault()
-        const regEx = /.jpeg|.jpg|.gif|.png|.webp/
-        const regMatch = e.target[1].files[0].name.match(regEx)
-        const imageTest = await imageServices.getAll()
-        const id = Math.max(...imageTest.map(x=>x.id))
-        const prep = id + regMatch[0]
-        const newForum = await forumServices.newForum({text:text, image:prep})
-        await imageServices.createOrder({file: e.target[1].files , id: id})
+        let prep
+        if(e.target[1].files[0]){
+            const regEx = /.jpeg|.jpg|.gif|.png|.webp/
+            const regMatch = e.target[1].files[0].name.match(regEx)
+            const imageTest = await imageServices.getAll()
+            const id = Math.max(...imageTest.map(x=>x.id))
+            prep = id + regMatch[0]
+            await imageServices.createOrder({file: e.target[1].files , id: id})
+            console.log('somethings wrong')
+        }
+        const newForum = await forumServices.newForum({text:text, image:prep? prep : null})
         setText('')
         update()
         change()

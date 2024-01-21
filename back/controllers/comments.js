@@ -23,7 +23,7 @@ router.post('/',tokenExtractor, async (req, res) =>{
         const newComment = {
             text: req.body.text,
             link: req.body.link,
-            image: req.body.image
+            image: req.body.image ? req.body.image : null
         }
         const post = await Post.findByPk(req.body.postId)
         const sentForum = await Comment.create({...newComment, userId: user.id,postId:post.id})

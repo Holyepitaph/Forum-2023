@@ -4,26 +4,35 @@ import loginServices from '../services/login'
 export const LoginPage = ({userUpdate}) =>{
     const [username, setUsername] = useState('')
     const [password,setPassword] = useState('')
+    const [error, setError] = useState('')
 
     useEffect(()=>{
       userUpdate()
   },[])
 
     const sendIt = async (e) =>{
-        e.preventDefault()
-        await loginServices.login(
-            {username: username,
-            password: password}
-        )
-        userUpdate()
-          setUsername('')
-          setPassword('')
+    try{
+      e.preventDefault()
+      await loginServices.login(
+          {username: username,
+          password: password}
+      )
+      userUpdate()
+        setUsername('')
+        setPassword('')
+    }catch{
+      setError("Incorrect Information")
+      setTimeout(() => {
+          setError(null)
+        }, 5000)
+    }
     }
 
 
     return(
         <div className="bg-backA dark:bg-back p-4 text-textA dark:text-text">
       <form className="bg-cardA dark:bg-card p-4 flex flex-col gap-4"  onSubmit={sendIt}>
+        {error ? <div className="text-[#D2042D] font-semibold">{error}</div> : null}
         <div className="flex gap-4">
           <span  className="p-0.5 px-2">Username:</span>
           <input 

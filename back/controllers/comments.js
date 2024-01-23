@@ -39,7 +39,7 @@ router.post('/:commentId',tokenExtractor, async (req, res) =>{
       const newComment = {
           text: req.body.text,
           link: req.body.link,
-          image: req.body.image,
+          image: req.body.image ? req.body.image: null,
       }
       const sentForum = await Comment.create({...newComment, userId: user.id})
       await SubComment.create({commentId:req.params.commentId,subId:sentForum.id})

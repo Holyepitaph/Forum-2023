@@ -47,7 +47,6 @@ const InputForum = ({change,update}) =>{
             const id = Math.max(...imageTest.map(x=>x.id))
             prep = id + regMatch[0]
             await imageServices.createOrder({file: e.target[1].files , id: id})
-            console.log('somethings wrong')
         }
         const newForum = await forumServices.newForum({text:text, image:prep? prep : null})
         setText('')

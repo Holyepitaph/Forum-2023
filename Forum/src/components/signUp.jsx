@@ -49,7 +49,7 @@ export const SignUp = () =>{
         <div className={SignUpTheme.main}>
           <div className={SignUpTheme.card}>
             <div className="text-2xl font-semibold">Create New User</div>
-            {error ? <div>{error}</div> : null}
+            {error ? <div className="text-[#D2042D] font-semibold">{error}</div> : null}
             <form className={SignUpTheme.card} onSubmit={sendIt}>
                 <div className={InputTheme.alt}>
                   <span className={SignUpTheme.text} >Username:</span>

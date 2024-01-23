@@ -19,8 +19,7 @@ Comment.init({
     allowNull: false
   },
   image: {
-    type: DataTypes.STRING,
-    allowNull: false
+    type: DataTypes.STRING
   },
   created:{
     type: DataTypes.DATEONLY,

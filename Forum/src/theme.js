@@ -1,7 +1,7 @@
  export const ForumTheme = {
     MainForum:{
         main:"w-full text-textA dark:text-text bg-backA dark:bg-back mt-4 p-4",
-        cardMain:"bg-cardA dark:bg-card my-4 grid grid-cols-12 justify-center rounded-xl dark:rounded-none md:px-2 md:py-4",
+        cardMain:"bg-cardA dark:bg-card my-4 grid grid-cols-12 justify-center rounded-xl dark:rounded-none md:px-2 md:py-4 ",
         image:"col-span-12 h-12 justify-self-center sm:col-span-2 sm:ml-4 sm:h-24 bg-closeA dark:bg-text ml-2 my-2 border border-white md:h-36 md:w-36",
         linkMain:"w-full h-full col-span-11 sm:col-span-9 mt-2 pb-4 flex flex-col justify-between md:text-2xl",
         linkAlt:'flex justify-between px-4 sm:ml-4',
@@ -96,9 +96,9 @@
 
  export const UserListTheme = {
     main:"bg-backA dark:bg-back mt-4 grid grid-cols-1 sm:grid-cols-2 p-4 gap-4 text-textA dark:text-text",
-    link:"bg-cardA dark:bg-card grid-cols-3 grid p-2 grid-1 text-left gap-2 sm:text-sm",
-    line: "col-span-3 border border-cardAltA dark:border-cardAlt",
-    text:"text-sm leading-loose",
+    link:"bg-cardA dark:bg-card grid-cols-3 grid p-2 grid-1 text-left gap-2 sm:text-sm md:text-lg md:pb-4 lg:grid-cols-2",
+    line: "col-span-3 border border-cardAltA dark:border-cardAlt md:border-2",
+    text:"text-sm leading-loose md:text-lg md:leading-[2.3rem]",
     textAlt:"sm:leading-loose"
  }
 
@@ -117,8 +117,11 @@
     AdminUserSingle:{
         main:"bg-backA dark:bg-back mt-4 grid grid-cols-1 sm:grid-cols-2 p-4 gap-4 text-textA dark:text-text",
         line: "col-span-3 border border-cardAltA dark:border-cardAlt",
-        card:"bg-cardA dark:bg-card py-4 grid grid-cols-2 gap-1 px-4 text-left rounded-2xl dark:rounded-none"
-    }
+        card:"bg-cardA dark:bg-card py-4 grid grid-cols-2 gap-1 px-4 text-left rounded-2xl dark:rounded-none  place-content-start",
+        cardAlt:"bg-cardA dark:bg-card py-4 grid grid-cols-1 gap-3 px-4 text-left rounded-2xl dark:rounded-none",
+        cardAltA:"bg-cardAltA dark:bg-cardAlt ml-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none"
+    },
+    Friend:"bg-cardAltA dark:bg-cardAlt mx-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none"
  }
 
  export const MessageSingleTheme = {
@@ -156,9 +159,9 @@
         externalButtons:"flex justify-between gap-4 pt-4"
     },
     line:"border border-cardA dark:border-card w-full col-span-2",
-    lineAlt:"border border-cardAltA dark:border-cardAlt w-full col-span-2",
-    BlockList:"bg-cardAltA dark:bg-cardAlt mx-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-2xl dark:rounded-none",
-    FriendList:"bg-cardAltA dark:bg-cardAlt ml-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none",
+    lineAlt:"border border-cardAltA dark:border-cardAlt w-full col-span-2 place-self-end",
+    BlockList:"bg-cardAltA dark:bg-cardAlt mb-2 mx-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-2xl dark:rounded-none",
+    FriendList:"bg-cardAltA dark:bg-cardAlt mb-2 mx-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none",
     Host:{
         main:"text-textA dark:text-text",
         button:{
@@ -167,7 +170,7 @@
         },
         mainCard:"bg-backA dark:bg-back mt-4",
         mainCardAlt:"grid grid-cols-1 sm:grid-cols-2 gap-4 p-4",
-        infoCard:"bg-cardA dark:bg-card py-4 grid grid-cols-2 gap-1 px-4 text-left rounded-2xl dark:rounded-none",
+        infoCard:"bg-cardA dark:bg-card py-4 grid grid-cols-2 gap-1 px-4 text-left rounded-2xl dark:rounded-none place-content-start",
         forumCard:"bg-cardA dark:bg-card flex flex-col  rounded-2xl dark:rounded-none",
         forumCardLink:"bg-cardAltA dark:bg-cardAlt mx-4 my-4 pt-6 rounded-l-2xl dark:rounded-none",
         friendsList:"bg-cardA dark:bg-card flex flex-col py-4  rounded-2xl dark:rounded-none",
@@ -176,7 +179,7 @@
  }
 
  export const InputTheme = {
-    main:"bg-mainA dark:bg-main w-full",
+    main:"bg-mainA dark:bg-main w-full pl-4",
     mainAlt:"bg-mainA dark:bg-main w-full pl-4",
     alt:"flex flex-col sm:flex-row gap-2 px-4",
     fileMain:"flex justify-between",
@@ -204,6 +207,6 @@
  }
 
  export const LoginMenuTheme ={
-    main:"flex gap-4 justify-between p-4 bg-backA dark:bg-back text-textA dark:text-text",
+    main:"flex gap-4 justify-between p-4 bg-backA dark:bg-back text-textA dark:text-text md:text-xl md:justify-center md:gap-8",
     link:"bg-backA dark:bg-back p-2 bg-cardA dark:bg-card"
  }

@@ -136,7 +136,7 @@ function App() {
           <Route path="/user/Messages" element={userStatus.admin == false ? <UserMessage userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
           <Route path="/user/Messages/:messageId" element={userStatus.admin == false ? <UserMessageSingle userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
           <Route path="/user/User" element={userStatus.admin == false ? <UserUserList userUpdate={userUpdate} user={userStatus.id}/> : <Navigate replace to="/" />} />
-          <Route path="/user/User/:userId" element={userStatus.admin == false ? <UserUserSingle userUpdate={userUpdate}/> : <Navigate replace to="/" />} />
+          <Route path="/user/User/:userId" element={userStatus.admin == false ? <UserUserSingle userUpdate={userUpdate}  user={userStatus.id}/> : <Navigate replace to="/" />} />
           <Route path="/" element={ <Test/> } />
     {/* Non-User Routes */}
           <Route path="/login" element={ !userStatus ? <LoginPage userUpdate={userUpdate}/> : <Navigate replace to="/"/>} />

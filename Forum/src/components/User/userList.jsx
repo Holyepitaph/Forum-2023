@@ -13,8 +13,6 @@ const DisplayUser = ({info}) =>{
             <div className={UserListTheme.line}/>
             <div>Name:</div><div>{info.name}</div>
             <div className={UserListTheme.line}/>
-            <div>Admin:</div><div>{info.admin}</div>
-            <div className={UserListTheme.line}/>
             <div>Email:</div><div>{info.email}</div>
             <div className={UserListTheme.line}/>
             <div>Number:</div><div>{info.phone}</div>

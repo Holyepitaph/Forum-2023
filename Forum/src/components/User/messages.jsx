@@ -15,7 +15,9 @@ const PersonalMessageLogic = ({info,user}) =>{
         )
     }else{
         return(
-            <></>
+            <div>
+                <div>Find Someone to Message</div>
+            </div>
         )
     }
 }
@@ -48,7 +50,7 @@ export const UserMessage = ({userUpdate, user}) =>{
     return(
         <div>
             <div className="text-textA dark:text-text">
-                <div className="bg-backA dark:bg-back flex flex-col gap-4 py-4 mt-4 px-4 w-full">
+                <div className="bg-backA dark:bg-back flex flex-col gap-4 py-4 mt-4 px-4 w-full lg:text-xl">
                     <div className="bg-cardAltA dark:bg-cardAlt rounded-xl dark:rounded-none">Messages List: </div>
                     {messages.map(x=>(
                         <div key={x.id} className="flex flex-col gap-4 bg-cardA dark:bg-card rounded-2xl dark:rounded-none">

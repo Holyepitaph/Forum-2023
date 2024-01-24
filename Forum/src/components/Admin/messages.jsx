@@ -15,7 +15,9 @@ const AllMessageLogic = ({info,user}) =>{
         )
     }else{
         return(
-            <></>
+            <div>
+                <div>Find Someone to Message</div>
+            </div>
         )
     }
 }
@@ -67,17 +69,17 @@ export const AdminMessage = ({userUpdate, user}) =>{
         <div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-textA dark:text-text">
                 <div className="bg-backA dark:bg-back flex flex-col gap-4 py-4 mt-4 px-4 w-full">
-                    <div className="bg-cardAltA dark:bg-cardAlt rounded-xl dark:rounded-none md:text-2xl md:py-2">Personal Messages: </div>
+                    <div className="bg-cardAltA dark:bg-cardAlt rounded-xl dark:rounded-none md:text-2xl lg:text-lg md:py-2">Personal Messages: </div>
                     {messages.map(x=>(
-                        <div key={x.id} className="flex flex-col gap-4 bg-cardA dark:bg-card rounded-2xl dark:rounded-none md:text-2xl">
+                        <div key={x.id} className="flex flex-col gap-4 bg-cardA dark:bg-card rounded-2xl dark:rounded-none md:text-2xl  lg:text-lg">
                             <PersonalMessageLogic info={x} user={user}/>
                         </div>
                     ))}
                 </div>
                 <div className="bg-backA dark:bg-back flex flex-col gap-2 py-4 mt-4 px-4 w-full">
-                    <div className="bg-cardAltA dark:bg-cardAlt rounded-xl dark:rounded-none md:text-2xl md:py-2">All Users Messages:</div>
+                    <div className="bg-cardAltA dark:bg-cardAlt rounded-xl dark:rounded-none md:text-2xl  lg:text-lg md:py-2">All Users Messages:</div>
                     {messages.map(x=>(
-                        <div key={x.id} className="flex flex-col gap-4 bg-cardA dark:bg-card rounded-2xl dark:rounded-none md:text-2xl">
+                        <div key={x.id} className="flex flex-col gap-4 bg-cardA dark:bg-card rounded-2xl dark:rounded-none md:text-2xl  lg:text-lg">
                             <AllMessageLogic info={x} user={user}/>
                         </div>
                     ))}

@@ -62,7 +62,7 @@ const FriendsList = ({info}) =>{
         if(status[0].status == 'friend'){
             //For Friends display info
             return(
-                <Link  className="bg-cardAltA dark:bg-cardAlt ml-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none" to={`/admin/User/${info.id}`} key={info.id}>
+                <Link  className={SingleUserListTheme.Friend} to={`/admin/User/${info.id}`} key={info.id}>
                     <div className="col-span-2 text-center">Pending Acceptance</div>
                     <div>Username:</div> <div>{info.username}</div>
                     <div className="border border-cardA dark:border-card w-full col-span-2"/>
@@ -80,7 +80,7 @@ const FriendsList = ({info}) =>{
     } else{
         //for confirmed friends display info
         return(
-            <Link  className="bg-cardAltA dark:bg-cardAlt ml-4 py-4 px-2 grid grid-cols-2 text-left gap-1 rounded-l-2xl dark:rounded-none" to={`/admin/User/${info.id}`} key={info.id}>
+            <Link  className={SingleUserListTheme.Friend} to={`/admin/User/${info.id}`} key={info.id}>
                     <div>Username:</div> <div>{info.username}</div>
                     <div className="border border-cardA dark:border-card w-full col-span-2"/>
                     <div>Name:</div> <div>{info.name}</div>
@@ -91,14 +91,14 @@ const FriendsList = ({info}) =>{
     }
 }
 
-const FriendUser = ({id,update}) =>{
+const FriendUser = ({id,update,friend}) =>{
     const addFriend = async () =>{
         await friendServices.newFriend({userId: id})
         update()
     }
     return(
         <>
-            <button className={SingleUserListTheme.RelationshipLogic.button} onClick={()=>addFriend()}>Friend Request</button>
+            <button className={SingleUserListTheme.RelationshipLogic.button} onClick={()=>addFriend()}>{friend ? 'Accept Friend' : "Friend Request"}</button>
         </>
     )
 }
@@ -162,7 +162,7 @@ const RelationshipLogic = ({id,update, status, user}) =>{
                 //viewed user sent to current user
                 return(
                     <div className={SingleUserListTheme.RelationshipLogic.main}>
-                        <FriendUser id={id} update={()=>update()}/>
+                        <FriendUser id={id} update={()=>update()} friend={true}/>
                         <BlockUser id={id}  update={()=>update()}/>
                         <DeleteRelationship id={id}  update={()=>update()}/>
                     </div>
@@ -289,10 +289,10 @@ const specialUpdate = () =>{
                             <div className={SingleUserListTheme.AdminUserSingle.line}/>
                             <div>Total Message Boards:</div> <div>{x.messageBoards.length}</div>
                         </div>
-                        <div className={SingleUserListTheme.AdminUserSingle.card}>
+                        <div className={SingleUserListTheme.AdminUserSingle.cardAlt}>
                             <div>Forums: </div>
                             {x.forums.map(x=>(
-                                <Link to={`/admin/Forum/${x.id}`} key={x.id}>
+                                <Link className={SingleUserListTheme.AdminUserSingle.cardAltA} to={`/admin/Forum/${x.id}`} key={x.id}>
                                     <div>Image: {x.image}</div>
                                     <div>Created Date: {x.created}</div>
                                     <div>Title: {x.text}</div>
@@ -301,11 +301,11 @@ const specialUpdate = () =>{
                             ))}
                         </div>
                         {/*need to add friends */}
-                        <div className={SingleUserListTheme.AdminUserSingle.card}>
+                        <div className={SingleUserListTheme.AdminUserSingle.cardAlt}>
                         <div className="mb-4">Friends List: </div>
                         {x.friends.map(x=><FriendsList key={x.id} info={x}/>)}
                         </div>
-                        <div className={SingleUserListTheme.AdminUserSingle.card}>
+                        <div className={SingleUserListTheme.AdminUserSingle.cardAlt}>
                         <div className="mb-4">Block List: </div>
                         {x.friends.map(x=><BlockList key={x.id} info={x}/>)}
                         </div>

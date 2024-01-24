@@ -35,7 +35,6 @@ const InfoChange = ({hidden,update,info}) =>{
                 image: prep ? prep : null,
                 username: info
             }
-            console.log(newUser)
             await userServices.updateUser(newUser)
             await imageServices.createOrder({file: e.target[4].files, id: id})
             setError(`Information Successfully Updated`)

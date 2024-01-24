@@ -21,7 +21,7 @@ export const LoginPage = ({userUpdate}) =>{
         setUsername('')
         setPassword('')
     }catch{
-      setError("Incorrect Information")
+      setError("Login Failed Please Check Information")
       setTimeout(() => {
           setError(null)
         }, 5000)
@@ -34,7 +34,7 @@ export const LoginPage = ({userUpdate}) =>{
       <form className="bg-cardA dark:bg-card p-4 flex flex-col gap-4"  onSubmit={sendIt}>
         {error ? <div className="text-[#D2042D] font-semibold">{error}</div> : null}
         <div className="flex gap-4">
-          <span  className="p-0.5 px-2">Username:</span>
+          <span  className="p-0.5 px-2 w-20">Username:</span>
           <input 
             type='text'
             value={username}
@@ -43,7 +43,7 @@ export const LoginPage = ({userUpdate}) =>{
           />
         </div>
         <div className="flex gap-4">
-          <span  className="p-0.5 px-2">Password:</span>
+          <span  className="p-0.5 px-2 w-20">Password:</span>
           <input
             type="password"
             className="w-full bg-mainA dark:bg-main pl-2"
